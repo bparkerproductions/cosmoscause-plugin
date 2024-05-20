@@ -52,3 +52,8 @@ add_action('admin_enqueue_scripts', 'cosmoscause_add_scripts');
  * Include approve/deny button and form entries functionality
  */
 include_once plugin_dir_path(__FILE__) . 'entries.php';
+
+/**
+ * Create the database page functionality under the "Forms" section
+ */
+include_once plugin_dir_path(__FILE__) . 'entries-database.php';
