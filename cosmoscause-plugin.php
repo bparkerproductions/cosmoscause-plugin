@@ -40,12 +40,13 @@ add_action('init', 'my_custom_plugin_init');
 /**
  * Styles and scripts
  */
-function my_custom_plugin_enqueue_scripts()
+function cosmoscause_add_scripts()
 {
     wp_enqueue_style('cosmoscause-plugin-style', plugins_url('css/style.css', __FILE__));
     wp_enqueue_script('cosmoscause-plugin-js', plugins_url('js/script.js', __FILE__), array(), '1.0', true);
 }
-add_action('wp_enqueue_scripts', 'my_custom_plugin_enqueue_scripts');
+add_action('admin_enqueue_scripts', 'cosmoscause_add_scripts');
+
 
 /**
  * Include approve/deny button and form entries functionality

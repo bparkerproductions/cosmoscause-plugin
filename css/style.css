@@ -1,3 +1,5 @@
-#approve_deny_buttons {
-  /* background: red; */
+/* Hide Sections */
+
+.postbox#notes {
+  display: none;
 }
