@@ -44,16 +44,34 @@ function display_pet_application_entries()
 
     if (empty($entries)) : ?>
         <p><?= esc_html__('No entries found.', 'cosmoscause-plugin') ?></p>
-    <?php endif;
+    <?php endif; ?>
 
-    foreach ($entries as $entry) :
-        // 4 = Pet Name
-        // 48 = Applicant name(s)
-        $pet_name = rgar($entry, 4);
-        $applicant_names = rgar($entry, 48); ?>
-        <p><?= esc_html($pet_name) ?></p>
+    <table id="entries-table" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th><?php esc_html_e('Applicant', 'cosmoscause-plugin'); ?></th>
+                <th><?php esc_html_e('Pet', 'cosmoscause-plugin'); ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php generate_table_rows($entries); ?>
+        </tbody>
+    </table>
+    <?php }
 
-        <p><?= list_items($applicant_names); ?></p>
+function generate_table_rows($entries)
+{
+    foreach ($entries as $entry) : ?>
+        <tr>
+            <?php
+            // 4 = Pet Name
+            // 48 = Applicant name(s)
+            $pet_name = rgar($entry, 4);
+            $applicant_names = rgar($entry, 48); ?>
+            <td><?= esc_html($pet_name) ?></td>
+
+            <td><?= list_items($applicant_names); ?></td>
+        </tr>
 <?php endforeach;
 }
 

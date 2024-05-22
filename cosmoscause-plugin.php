@@ -43,7 +43,14 @@ add_action('init', 'my_custom_plugin_init');
 function cosmoscause_add_scripts()
 {
     wp_enqueue_style('cosmoscause-plugin-style', plugins_url('css/style.css', __FILE__));
-    wp_enqueue_script('cosmoscause-plugin-js', plugins_url('js/script.js', __FILE__), array(), '1.0', true);
+
+    // Table
+    wp_enqueue_style('datatables-css', 'https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css');
+    wp_enqueue_script('bootstrap5-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js', array(), null, true);
+    wp_enqueue_script('datatables-js', 'https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js', array(), null, true);
+    wp_enqueue_script('datatables-bs5-js', 'https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js', array('datatables-js'), null, true);
+
+    wp_enqueue_script('cosmoscause-plugin-js', plugins_url('js/script.js', __FILE__), array('datatables-js', 'datatables-bs5-js'), '1.0', true);
 }
 add_action('admin_enqueue_scripts', 'cosmoscause_add_scripts');
 
