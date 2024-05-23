@@ -31,6 +31,7 @@ add_action('rest_api_init', function () {
 
 function cosmoscause_plugin_approve_entry(WP_REST_Request $request)
 {
+    error_log("Approving entry ID: $entry_id");
     $entry_id = intval($request['entry_id']);
     update_post_meta($entry_id, '_approval_status', 'Approved');
     return new WP_REST_Response(array('status' => 'Approved'), 200);

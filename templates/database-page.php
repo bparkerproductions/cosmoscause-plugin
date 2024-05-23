@@ -33,24 +33,6 @@ function display_pet_application_entries()
 {
     if (!class_exists('GFAPI')) : ?>
         <p><?= esc_html__('Gravity Forms API is not available.', 'cosmoscause-plugin') ?></p>
-    <?php endif;
-
-    // Get pet application form
-    $form_id = 1;
-
-
-    // Get entries for the current form
-    $search_criteria = array();
-    $sorting = array();
-    $paging = array('offset' => 0, 'page_size' => 100);
-    $entries = GFAPI::get_entries($form_id, $search_criteria, $sorting, $paging);
-
-    if (is_wp_error($entries)) : ?>
-        <p><?= esc_html__('Error fetching entries: ', 'cosmoscause-plugin') . $entries->get_error_message() ?></p>
-    <?php endif;
-
-    if (empty($entries)) : ?>
-        <p><?= esc_html__('No entries found.', 'cosmoscause-plugin') ?></p>
     <?php endif; ?>
 
     <table id="entries-table" class="table table-striped table-bordered">
@@ -67,34 +49,35 @@ function display_pet_application_entries()
             </tr>
         </thead>
         <tbody>
-            <?php generate_table_rows($entries, $form_id); ?>
+            <?php generate_table_rows(); ?>
         </tbody>
     </table>
     <?php }
 
-function generate_table_rows($entries, $form_id)
+function generate_table_rows()
 {
-    foreach ($entries as $entry) : $entry_id = $entry['id']; ?>
-        <tr data-id="<?= $entry_id; ?>">
-            <?php
-            // 4 = Pet Name
-            // 48 = Applicant name(s)
-            // 47 = Date of application
-            // 7 = Phone number
-            // 8 = Email
-            $pet_name = rgar($entry, 4);
-            $applicant_names = rgar($entry, 48);
-            $todays_date = rgar($entry, 47);
-            $phone_number = rgar($entry, 7);
-            $email = rgar($entry, 8);
-            $entry_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}"); ?>
+    $database_entries = get_posts(array(
+        'post_type' => 'database_entry',
+        'posts_per_page' => -1
+    ));
+    foreach ($database_entries as $entry) :
+
+        $entry_id = get_post_meta($entry->ID, '_gf_entry_id', true);
+        $applicant_approval_status = get_post_meta($entry->ID, '_applicant_approval_status', true);
+        $pet_name = get_post_meta($entry->ID, '_pet_name', true);
+        $applicant_names = get_post_meta($entry->ID, '_applicant_names', true);
+        $phone_number = get_post_meta($entry->ID, '_applicant_phone_number', true);
+        $email = get_post_meta($entry->ID, '_applicant_email', true);
+        $application_date = get_post_meta($entry->ID, '_application_date', true);
+        $application_url = get_post_meta($entry->ID, '_application_url', true); ?>
+        <tr>
             <td>
-                <a class="text-decoration-none" href="<?= esc_url($entry_url) ?>" target="_blank">
+                <a class="text-decoration-none" href="<?= esc_url($application_url) ?>" target="_blank">
                     <i class="fa-regular fa-arrow-up-right-from-square"></i> <?= $entry_id ?>
                 </a>
             </td>
             <td><?= esc_html($pet_name) ?></td>
-            <td><?= list_items($applicant_names); ?></td>
+            <td><?= esc_html($applicant_names); ?></td>
             <td>
                 <a class="me-2 text-decoration-none" href="mailto:<?= esc_html($email) ?>">
                     <span class="me-2"><i class="fa-sharp fa-light fa-envelope"></i></span>Email
@@ -103,7 +86,7 @@ function generate_table_rows($entries, $form_id)
                     <span class="me-2"><i class="fa-duotone fa-phone"></i></span>Phone
                 </a>
             </td>
-            <td><?= esc_html($todays_date); ?></td>
+            <td><?= esc_html($application_date); ?></td>
             <td>
                 <div class="d-flex flex-column align-items-start">
                     <span class="badge bg-info mb-2">Undecided</span>
