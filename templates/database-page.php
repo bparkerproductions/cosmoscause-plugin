@@ -89,12 +89,12 @@ function generate_table_rows()
             <td><?= esc_html($application_date); ?></td>
             <td>
                 <div class="d-flex flex-column align-items-start">
-                    <span class="badge bg-info mb-2">Undecided</span>
+                    <span class="badge bg-info mb-2"><?= esc_html($applicant_approval_status) ?></span>
                     <div>
-                        <button class="btn btn-sm btn-success text-white approve-button" data-entry-id="<?= esc_attr($entry_id); ?>">
-                            <span class="me-2"><i class="fa-regular fa-check"></i></span>Approve
+                        <button class="btn btn-sm btn-success text-white approve-button" data-post-id="<?= $entry->ID; ?>">
+                            <span class=" me-2"><i class="fa-regular fa-check"></i></span>Approve
                         </button>
-                        <button class="btn btn-sm btn-danger text-white deny-button" data-entry-id="<?= esc_attr($entry_id); ?>">
+                        <button class="btn btn-sm btn-danger text-white deny-button" data-post-id="<?= $entry->ID; ?>">
                             <span class=" me-2"><i class="fa-regular fa-xmark"></i></span>Deny
                         </button>
                     </div>

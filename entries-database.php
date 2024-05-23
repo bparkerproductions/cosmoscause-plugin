@@ -66,8 +66,8 @@ function cosmoscause_sync_gf_entries_to_cpt()
         $email = rgar($entry, 8);
         $application_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}");
 
+        // Create a new CPT entry
         if (empty($existing_post_id)) {
-            // Create a new CPT entry
             $post_id = wp_insert_post(array(
                 'post_type' => 'database_entry',
                 'post_title' => 'Entry ' . $entry_id . ': application for ' . $pet_name . ' from ' . $applicant_names . ' on  ' . $application_date,
@@ -81,7 +81,6 @@ function cosmoscause_sync_gf_entries_to_cpt()
                     '_applicant_email' => $email,
                     '_application_date' => $application_date,
                     '_application_url' => $application_url
-
                 ),
             ));
         }

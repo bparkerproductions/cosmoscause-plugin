@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
  * Register REST API endpoints
  */
 add_action('rest_api_init', function () {
-    register_rest_route('cosmoscause-plugin/v1', '/approve-entry/(?P<entry_id>\d+)', array(
+    register_rest_route('cosmoscause-plugin/v1', '/approve-entry/(?P<post_id>\d+)', array(
         'methods' => 'POST',
         'callback' => 'cosmoscause_plugin_approve_entry',
         'permission_callback' => function () {
@@ -20,7 +20,7 @@ add_action('rest_api_init', function () {
         }
     ));
 
-    register_rest_route('cosmoscause-plugin/v1', '/deny-entry/(?P<entry_id>\d+)', array(
+    register_rest_route('cosmoscause-plugin/v1', '/deny-entry/(?P<post_id>\d+)', array(
         'methods' => 'POST',
         'callback' => 'cosmoscause_plugin_deny_entry',
         'permission_callback' => function () {
@@ -31,15 +31,16 @@ add_action('rest_api_init', function () {
 
 function cosmoscause_plugin_approve_entry(WP_REST_Request $request)
 {
-    error_log("Approving entry ID: $entry_id");
-    $entry_id = intval($request['entry_id']);
-    update_post_meta($entry_id, '_approval_status', 'Approved');
-    return new WP_REST_Response(array('status' => 'Approved'), 200);
+    $newStatus = 'Approved';
+    $post_id = intval($request->get_param('post_id'));
+    update_post_meta($post_id, '_applicant_approval_status', $newStatus);
+    return new WP_REST_Response(array('status' => $newStatus, 'updated_post_id' => $post_id), 200);
 }
 
 function cosmoscause_plugin_deny_entry(WP_REST_Request $request)
 {
-    $entry_id = intval($request['entry_id']);
-    update_post_meta($entry_id, '_approval_status', 'Denied');
-    return new WP_REST_Response(array('status' => 'Denied'), 200);
+    $newStatus = 'Denied';
+    $post_id = intval($request['post_id']);
+    update_post_meta($post_id, '_applicant_approval_status', $newStatus);
+    return new WP_REST_Response(array('status' => $newStatus), 200);
 }
