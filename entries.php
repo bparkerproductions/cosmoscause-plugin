@@ -1,6 +1,9 @@
 <?php
 
-// Ensure this file is included in WordPress
+/**
+ * The entries file will modify the gravity forms "Entries" section with custom functions and features.
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -21,8 +24,5 @@ function add_approve_deny_buttons($meta_boxes, $entry, $form)
 
 function render_approve_deny_buttons($args)
 {
-    $entry_id = rgar($args['entry'], 'id');
-    $form_id = $args['form']['id'];
-
     include plugin_dir_path(__FILE__) . 'templates/approve-deny-buttons.php';
 }

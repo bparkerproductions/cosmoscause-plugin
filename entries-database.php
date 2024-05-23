@@ -19,6 +19,20 @@ function my_custom_plugin_add_admin_page()
     );
 }
 
+// Display a comma separated list for table data with multiple items
+function list_items($items)
+{
+    if (empty($items)) {
+        return '';
+    }
+
+    if (is_serialized($items)) {
+        $items = maybe_unserialize($items);
+    }
+
+    return esc_html(implode(', ', $items,));
+}
+
 // Function to display the content of the new admin page
 function database_page_content()
 {
