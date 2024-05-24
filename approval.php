@@ -40,7 +40,7 @@ function cosmoscause_plugin_approve_entry(WP_REST_Request $request)
 function cosmoscause_plugin_deny_entry(WP_REST_Request $request)
 {
     $newStatus = 'Denied';
-    $post_id = intval($request['post_id']);
+    $post_id = intval($request->get_param('post_id'));
     update_post_meta($post_id, '_applicant_approval_status', $newStatus);
     return new WP_REST_Response(array('status' => $newStatus), 200);
 }

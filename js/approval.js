@@ -4,7 +4,7 @@
     document.querySelectorAll(".approve-button").forEach(function (button) {
       button.addEventListener("click", function () {
         const postId = this.getAttribute("data-post-id");
-        console.log(postId);
+
         fetch(
           ajax_object.base_url +
             "/wp-json/cosmoscause-plugin/v1/approve-entry/" +
@@ -20,10 +20,22 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.status === "Approved") {
-              //   alert("Entry Approved");
-              //   location.reload();
-            } else {
-              alert("Failed to approve entry");
+              const entryStatus = document.querySelector(
+                `.entry-status[data-for-post="${postId}"]`
+              );
+              const approvedBtn = document.querySelector(
+                `.approve-button[data-post-id="${postId}"]`
+              );
+              const deniedBtn = document.querySelector(
+                `.deny-button[data-post-id="${postId}"]`
+              );
+
+              // Update button state and status text
+              entryStatus.textContent = "Approved";
+              entryStatus.style.backgroundColor = "#65c9bb";
+              approvedBtn.classList.add("d-none");
+              deniedBtn.classList.remove("d-none");
+              flashMessage("This form entry has been approved!", postId);
             }
           });
       });
@@ -47,13 +59,38 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.status === "Denied") {
-              alert("Entry Denied");
-              //   location.reload();
-            } else {
-              alert("Failed to deny entry");
+              const entryStatus = document.querySelector(
+                `.entry-status[data-for-post="${postId}"]`
+              );
+              const approvedBtn = document.querySelector(
+                `.approve-button[data-post-id="${postId}"]`
+              );
+              const deniedBtn = document.querySelector(
+                `.deny-button[data-post-id="${postId}"]`
+              );
+
+              // Update button state and status text
+              approvedBtn.classList.remove("d-none");
+              deniedBtn.classList.add("d-none");
+              entryStatus.textContent = "Denied";
+              entryStatus.style.backgroundColor = "#ff4e4e";
+
+              flashMessage("This form entry has been denied.", postId);
             }
           });
       });
     });
+
+    function flashMessage(message, postId) {
+      const messageEl = document.querySelector(
+        `.button-alert-message[data-for-post="${postId}"]`
+      );
+      messageEl.textContent = message;
+      messageEl.classList.remove("d-none");
+
+      setTimeout(function () {
+        messageEl.classList.add("d-none");
+      }, 1500);
+    }
   });
 })();

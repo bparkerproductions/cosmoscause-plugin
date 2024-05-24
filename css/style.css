@@ -3,3 +3,16 @@
 .postbox#notes {
   display: none;
 }
+
+/* CSS for entries datatables and approve buttons */
+.entry-status {
+  background-color: #b9a4aa;
+}
+
+.entry-status.denied {
+  background-color: #ff4e4e;
+}
+
+.entry-status.approved {
+  background-color: #65c9bb;
+}
