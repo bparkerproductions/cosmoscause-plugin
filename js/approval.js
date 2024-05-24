@@ -2,7 +2,8 @@
 (function () {
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".approve-button").forEach(function (button) {
-      button.addEventListener("click", function () {
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
         const postId = this.getAttribute("data-post-id");
 
         fetch(
@@ -42,7 +43,8 @@
     });
 
     document.querySelectorAll(".deny-button").forEach(function (button) {
-      button.addEventListener("click", function () {
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
         const postId = this.getAttribute("data-post-id");
         fetch(
           ajax_object.base_url +
