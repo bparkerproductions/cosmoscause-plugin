@@ -24,7 +24,7 @@ function add_approve_deny_buttons($meta_boxes, $entry, $form)
 
 function render_approve_deny_buttons($args)
 {
-    $entry = get_posts(array(
+    $thePost = get_posts(array(
         'post_type' => 'database_entry',
         'posts_per_page' => 1,
         'meta_query'     => array(
@@ -34,9 +34,16 @@ function render_approve_deny_buttons($args)
                 'compare' => '='
             )
         )
-    ))[0];
+    ));
+
+    if (isset($thePost[0])) :
+        $entry = $thePost[0];
+    else : return;
+    endif;
 
     $applicant_approval_status = get_post_meta($entry->ID, '_applicant_approval_status', true);
 
-    include plugin_dir_path(__FILE__) . 'templates/approve-deny-buttons.php';
+    if ($applicant_approval_status) :
+        include plugin_dir_path(__FILE__) . 'templates/approve-deny-buttons.php';
+    endif;
 }
