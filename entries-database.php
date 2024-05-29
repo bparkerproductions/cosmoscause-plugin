@@ -44,6 +44,7 @@ function cosmoscause_sync_gf_entries_to_cpt()
     }
 
     cosmoscause_sync_pet_applications(1);
+    cosmoscause_sync_foster_applications(2);
 }
 
 /**
@@ -51,7 +52,7 @@ function cosmoscause_sync_gf_entries_to_cpt()
  */
 function cosmoscause_sync_pet_applications($form_id)
 {
-    $paging = array('offset' => 0, 'page_size' => 200); // Adjust as needed
+    $paging = array('offset' => 0, 'page_size' => 200);
 
     $entries = GFAPI::get_entries($form_id, array(), array(), $paging);
 
@@ -66,29 +67,59 @@ function cosmoscause_sync_pet_applications($form_id)
             'fields' => 'ids'
         ));
 
-        $pet_name = rgar($entry, 4);
-        $applicant_names = list_items(rgar($entry, 48));
-        $application_date = rgar($entry, 47);
-        $phone_number = rgar($entry, 7);
-        $email = rgar($entry, 8);
         $application_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}");
+
+        $meta_array = array(
+            '_gf_entry_id' => $entry_id,
+            '_applicant_approval_status' => 'Pending',
+            '_pet_name' => rgar($entry, 4),
+            '_applicant_names' => list_items(rgar($entry, 48)),
+            '_applicant_phone_number' => rgar($entry, 7),
+            '_applicant_email' => rgar($entry, 8),
+            '_application_date' => rgar($entry, 47),
+            '_application_url' => $application_url
+        );
 
         // Create a new CPT entry
         if (empty($existing_post_id)) {
             wp_insert_post(array(
                 'post_type' => 'application_entry',
-                'post_title' => 'Entry ' . $entry_id . ': application for ' . $pet_name . ' from ' . $applicant_names . ' on  ' . $application_date,
+                'post_title' => 'Pet application entry ' . $entry_id . ':',
                 'post_status' => 'publish',
-                'meta_input' => array(
-                    '_gf_entry_id' => $entry_id,
-                    '_applicant_approval_status' => 'Pending',
-                    '_pet_name' => $pet_name,
-                    '_applicant_names' => $applicant_names,
-                    '_applicant_phone_number' => $phone_number,
-                    '_applicant_email' => $email,
-                    '_application_date' => $application_date,
-                    '_application_url' => $application_url
-                ),
+                'meta_input' => $meta_array
+            ));
+        }
+    }
+}
+
+function cosmoscause_sync_foster_applications($form_id)
+{
+    $paging = array('offset' => 0, 'page_size' => 200);
+
+    $entries = GFAPI::get_entries($form_id, array(), array(), $paging);
+
+    foreach ($entries as $entry) {
+        $entry_id = $entry['id'];
+
+        // Check if a CPT already exists for this entry
+        $existing_post_id = get_posts(array(
+            'post_type' => 'foster_entry',
+            'meta_key' => '_gf_entry_id',
+            'meta_value' => $entry_id,
+            'fields' => 'ids'
+        ));
+
+        $meta_array = array(
+            '_gf_entry_id' => $entry_id,
+        );
+
+        // Create a new CPT entry
+        if (empty($existing_post_id)) {
+            wp_insert_post(array(
+                'post_type' => 'foster_entry',
+                'post_title' => 'Foster Entry ' . $entry_id . ':',
+                'post_status' => 'publish',
+                'meta_input' => $meta_array,
             ));
         }
     }

@@ -23,6 +23,9 @@ function cosmoscause_register_pet_application_database_entry_cpt()
     register_post_type('application_entry', $args);
 }
 
+/**
+ * Register a hidden CPT for Foster Application database entries
+ */
 function cosmoscause_register_foster_application_database_entry_cpt()
 {
     $args = array(
