@@ -53,7 +53,7 @@ function cosmoscause_sync_gf_entries_to_cpt()
 
         // Check if a CPT already exists for this entry
         $existing_post_id = get_posts(array(
-            'post_type' => 'database_entry',
+            'post_type' => 'application_entry',
             'meta_key' => '_gf_entry_id',
             'meta_value' => $entry_id,
             'fields' => 'ids'
@@ -68,8 +68,8 @@ function cosmoscause_sync_gf_entries_to_cpt()
 
         // Create a new CPT entry
         if (empty($existing_post_id)) {
-            $post_id = wp_insert_post(array(
-                'post_type' => 'database_entry',
+            wp_insert_post(array(
+                'post_type' => 'application_entry',
                 'post_title' => 'Entry ' . $entry_id . ': application for ' . $pet_name . ' from ' . $applicant_names . ' on  ' . $application_date,
                 'post_status' => 'publish',
                 'meta_input' => array(

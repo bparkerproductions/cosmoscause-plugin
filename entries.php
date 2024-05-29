@@ -25,7 +25,7 @@ function add_approve_deny_buttons($meta_boxes, $entry, $form)
 function render_approve_deny_buttons($args)
 {
     $thePost = get_posts(array(
-        'post_type' => 'database_entry',
+        'post_type' => 'application_entry',
         'posts_per_page' => 1,
         'meta_query'     => array(
             array(

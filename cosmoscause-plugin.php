@@ -11,27 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function cosmoscause_register_database_entry_cpt()
-{
-    $args = array(
-        'label'                 => __('Database Entry', 'text_domain'),
-        'description'           => __('Database entries for custom data', 'text_domain'),
-        'supports'              => array('title', 'editor', 'custom-fields'),
-        'hierarchical'          => false,
-        'public'                => true,
-        'show_ui'               => false,
-        'show_in_admin_bar'     => false,
-        'show_in_nav_menus'     => false,
-        'can_export'            => true,
-        'has_archive'           => false,
-        'exclude_from_search'   => true,
-        'publicly_queryable'    => false,
-        'capability_type'       => 'post',
-    );
-    register_post_type('database_entry', $args);
-}
-
-add_action('init', 'cosmoscause_register_database_entry_cpt');
+include_once plugin_dir_path(__FILE__) . 'cpts.php';
 
 /**
  * On plugin activation

@@ -57,7 +57,7 @@ function display_pet_application_entries()
 function generate_table_rows()
 {
     $database_entries = get_posts(array(
-        'post_type' => 'database_entry',
+        'post_type' => 'application_entry',
         'posts_per_page' => -1
     ));
     foreach ($database_entries as $entry) :
