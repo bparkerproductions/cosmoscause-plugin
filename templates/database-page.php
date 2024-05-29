@@ -24,23 +24,29 @@ if (!current_user_can('manage_options')) {
     </div>
 
     <section>
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Active</a>
+
+        <!-- Tabs for Pet Application and Foster Application -->
+        <ul class="nav nav-tabs my-3" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pet-application--tab" data-bs-toggle="tab" data-bs-target="#pet-application" type="button" role="tab" aria-controls="pet-application" aria-selected="true">Pet Applications</button>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="foster-application-tab" data-bs-toggle="tab" data-bs-target="#foster-application" type="button" role="tab" aria-controls="foster-application" aria-selected="false">Foster Applications</button>
             </li>
         </ul>
-        <?php if (class_exists('GFAPI')) :
-            include_once plugin_dir_path(__FILE__) . 'pet-application-table.php';
-            display_pet_application_entries();
-        endif; ?>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="pet-application" role="tabpanel" aria-labelledby="pet-application-tab">
+                <?php if (class_exists('GFAPI')) :
+                    include_once plugin_dir_path(__FILE__) . 'tables/pet-application-table.php';
+                    display_pet_application_entries();
+                endif; ?>
+            </div>
+            <div class="tab-pane fade" id="foster-application" role="tabpanel" aria-labelledby="foster-application-tab">
+                <?php if (class_exists('GFAPI')) :
+                    include_once plugin_dir_path(__FILE__) . 'tables/foster-application-table.php';
+                    display_foster_application_entries();
+                endif; ?>
+            </div>
+        </div>
     </section>
 </div>
