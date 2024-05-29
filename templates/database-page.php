@@ -24,6 +24,20 @@ if (!current_user_can('manage_options')) {
     </div>
 
     <section>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
         <?php if (class_exists('GFAPI')) :
             include_once plugin_dir_path(__FILE__) . 'pet-application-table.php';
             display_pet_application_entries();
