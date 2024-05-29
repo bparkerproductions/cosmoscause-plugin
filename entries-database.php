@@ -43,7 +43,14 @@ function cosmoscause_sync_gf_entries_to_cpt()
         return;
     }
 
-    $form_id = 1;
+    cosmoscause_sync_pet_applications(1);
+}
+
+/**
+ * Sync pet application (GF ID of 1)
+ */
+function cosmoscause_sync_pet_applications($form_id)
+{
     $paging = array('offset' => 0, 'page_size' => 200); // Adjust as needed
 
     $entries = GFAPI::get_entries($form_id, array(), array(), $paging);
