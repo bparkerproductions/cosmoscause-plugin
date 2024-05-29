@@ -109,8 +109,15 @@ function cosmoscause_sync_foster_applications($form_id)
             'fields' => 'ids'
         ));
 
+        $application_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}");
         $meta_array = array(
             '_gf_entry_id' => $entry_id,
+            '_applicant_approval_status' => 'Pending',
+            '_applicant_names' => rgar($entry, 8),
+            '_applicant_phone_number' => rgar($entry, 49),
+            '_applicant_email' => rgar($entry, 11),
+            '_application_signature_date' => rgar($entry, 44),
+            '_application_url' => $application_url
         );
 
         // Create a new CPT entry

@@ -28,7 +28,7 @@ if (!current_user_can('manage_options')) {
         <!-- Tabs for Pet Application and Foster Application -->
         <ul class="nav nav-tabs my-3" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pet-application--tab" data-bs-toggle="tab" data-bs-target="#pet-application" type="button" role="tab" aria-controls="pet-application" aria-selected="true">Pet Applications</button>
+                <button class="nav-link active" id="pet-application-tab" data-bs-toggle="tab" data-bs-target="#pet-application" type="button" role="tab" aria-controls="pet-application" aria-selected="true">Pet Applications</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="foster-application-tab" data-bs-toggle="tab" data-bs-target="#foster-application" type="button" role="tab" aria-controls="foster-application" aria-selected="false">Foster Applications</button>
@@ -38,13 +38,13 @@ if (!current_user_can('manage_options')) {
             <div class="tab-pane fade show active" id="pet-application" role="tabpanel" aria-labelledby="pet-application-tab">
                 <?php if (class_exists('GFAPI')) :
                     include_once plugin_dir_path(__FILE__) . 'tables/pet-application-table.php';
-                    display_pet_application_entries();
+                    Cosmoscause\PetApplication\display_entries();
                 endif; ?>
             </div>
             <div class="tab-pane fade" id="foster-application" role="tabpanel" aria-labelledby="foster-application-tab">
                 <?php if (class_exists('GFAPI')) :
                     include_once plugin_dir_path(__FILE__) . 'tables/foster-application-table.php';
-                    display_foster_application_entries();
+                    Cosmoscause\FosterApplication\display_entries();
                 endif; ?>
             </div>
         </div>

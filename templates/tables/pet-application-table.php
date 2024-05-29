@@ -1,5 +1,8 @@
 <?php
-function display_pet_application_entries()
+
+namespace Cosmoscause\PetApplication;
+
+function display_entries()
 { ?>
     <table id="entries-table" class="table table-striped table-bordered">
         <thead>

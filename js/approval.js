@@ -1,6 +1,7 @@
 // Main script for calling WP REST API approve/deny endpoints from plugin approve/deny buttons.
 (function () {
   document.addEventListener("DOMContentLoaded", function () {
+    console.log("test");
     document.querySelectorAll(".approve-button").forEach(function (button) {
       button.addEventListener("click", function (e) {
         e.preventDefault();
