@@ -73,6 +73,12 @@ function cosmoscause_sync_pet_applications($form_id)
             '_gf_entry_id' => $entry_id,
             '_applicant_approval_status' => 'Pending',
             '_pet_name' => rgar($entry, 4),
+            '_applicant_rent_status' => rgar($entry, 12),
+            '_veterinarian_list' => rgar($entry, 26),
+            '_landlord_phone' => rgar($entry, 13),
+            '_landlord_email' => rgar($entry, 14),
+            '_reference_name' => rgar($entry, 49),
+            '_reference_phone' => rgar($entry, 50),
             '_applicant_names' => list_items(rgar($entry, 48)),
             '_applicant_phone_number' => rgar($entry, 7),
             '_applicant_email' => rgar($entry, 8),
@@ -92,6 +98,9 @@ function cosmoscause_sync_pet_applications($form_id)
     }
 }
 
+/**
+ * Sync pet application (GF ID of 2)
+ */
 function cosmoscause_sync_foster_applications($form_id)
 {
     $paging = array('offset' => 0, 'page_size' => 200);
@@ -116,8 +125,9 @@ function cosmoscause_sync_foster_applications($form_id)
             '_applicant_names' => rgar($entry, 8),
             '_applicant_phone_number' => rgar($entry, 49),
             '_applicant_email' => rgar($entry, 11),
+            '_applicant_address' => rgar($entry, 6),
             '_application_signature_date' => rgar($entry, 44),
-            '_application_url' => $application_url
+            '_application_url' => $application_url,
         );
 
         // Create a new CPT entry

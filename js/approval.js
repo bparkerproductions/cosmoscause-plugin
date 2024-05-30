@@ -1,7 +1,6 @@
 // Main script for calling WP REST API approve/deny endpoints from plugin approve/deny buttons.
 (function () {
   document.addEventListener("DOMContentLoaded", function () {
-    console.log("test");
     document.querySelectorAll(".approve-button").forEach(function (button) {
       button.addEventListener("click", function (e) {
         e.preventDefault();
@@ -22,21 +21,11 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.status === "Approved") {
-              const entryStatus = document.querySelector(
-                `.entry-status[data-for-post="${postId}"]`
-              );
-              const approvedBtn = document.querySelector(
-                `.approve-button[data-post-id="${postId}"]`
-              );
-              const deniedBtn = document.querySelector(
-                `.deny-button[data-post-id="${postId}"]`
-              );
-
               // Update button state and status text
-              entryStatus.textContent = "Approved";
-              entryStatus.style.backgroundColor = "#65c9bb";
-              approvedBtn.classList.add("d-none");
-              deniedBtn.classList.remove("d-none");
+              entryStatus(postId).textContent = "Approved";
+              entryStatus(postId).style.backgroundColor = "#65c9bb";
+              approvedBtn(postId).classList.add("d-none");
+              deniedBtn(postId).classList.remove("d-none");
               flashMessage("This form entry has been approved!", postId);
             }
           });
@@ -62,21 +51,11 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.status === "Denied") {
-              const entryStatus = document.querySelector(
-                `.entry-status[data-for-post="${postId}"]`
-              );
-              const approvedBtn = document.querySelector(
-                `.approve-button[data-post-id="${postId}"]`
-              );
-              const deniedBtn = document.querySelector(
-                `.deny-button[data-post-id="${postId}"]`
-              );
-
               // Update button state and status text
-              approvedBtn.classList.remove("d-none");
-              deniedBtn.classList.add("d-none");
-              entryStatus.textContent = "Denied";
-              entryStatus.style.backgroundColor = "#ff4e4e";
+              approvedBtn(postId).classList.remove("d-none");
+              deniedBtn(postId).classList.add("d-none");
+              entryStatus(postId).textContent = "Denied";
+              entryStatus(postId).style.backgroundColor = "#ff4e4e";
 
               flashMessage("This form entry has been denied.", postId);
             }
@@ -84,6 +63,34 @@
       });
     });
 
+    // Hide/show functionality for the deny/approve change status buttons
+    document
+      .querySelectorAll(".approve-buttons__change-status")
+      .forEach(function (button) {
+        button.addEventListener("click", function () {
+          const parent = this.closest(".approve-buttons");
+          const buttonContainer = parent.querySelector(
+            ".approve-buttons__buttons"
+          );
+          buttonContainer.classList.remove("d-none");
+          buttonContainer.classList.add("d-flex");
+        });
+      });
+
+    // Selector functions
+    function entryStatus(id) {
+      return document.querySelector(`.entry-status[data-for-post="${id}"]`);
+    }
+
+    function approvedBtn(id) {
+      return document.querySelector(`.approve-button[data-post-id="${id}"]`);
+    }
+
+    function deniedBtn(id) {
+      return document.querySelector(`.deny-button[data-post-id="${id}"]`);
+    }
+
+    // Helper functions
     function flashMessage(message, postId) {
       const messageEl = document.querySelector(
         `.button-alert-message[data-for-post="${postId}"]`

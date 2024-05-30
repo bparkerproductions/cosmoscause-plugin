@@ -4,7 +4,7 @@ namespace Cosmoscause\FosterApplication;
 
 function display_entries()
 { ?>
-    <table id="entries-table" class="table table-striped table-bordered">
+    <table id="foster-application-table" class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th><?php esc_html_e('Entry', 'cosmoscause-plugin'); ?></th>
