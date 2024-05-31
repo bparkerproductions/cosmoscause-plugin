@@ -109,15 +109,7 @@ function generate_table_rows()
                         <button class="btn btn-sm btn-light" data-bs-toggle="collapse" href="#checklist-container<?= $entry->ID; ?>" role="button">Close</button>
                     </div>
                 </div>
-                <div id="note-container<?= $entry->ID ?>" class="p-3 collapse">
-                    <div class="bg-info rounded p-3">
-                        <h5 class="pb-2 border-bottom text-light">
-                            <i class="fa-light fa-notes me-2 fa-2x"></i>Notes
-                        </h5>
-
-                        <button class="btn btn-sm btn-light" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" role="button">Close</button>
-                    </div>
-                </div>
+                <?php include plugin_dir_path(__FILE__) . 'notes-section.php'; ?>
             </td>
         </tr>
 <?php endforeach;
