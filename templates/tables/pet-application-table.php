@@ -44,9 +44,20 @@ function generate_table_rows()
         $application_url = get_post_meta($entry->ID, '_application_url', true); ?>
         <tr>
             <td>
-                <a class="text-decoration-none" href="<?= esc_url($application_url) ?>" target="_blank">
-                    <i class="fa-regular fa-arrow-up-right-from-square"></i> <?= $entry_id ?>
-                </a>
+                <div class="d-flex flex-column">
+                    <a class="text-decoration-none" href="<?= esc_url($application_url) ?>" target="_blank">
+                        <i class="fa-regular fa-arrow-up-right-from-square"></i> <?= $entry_id ?>
+                    </a>
+
+                    <!-- Toggle UI Buttons -->
+                    <button class="btn btn-sm btn-info text-white my-1 d-flex justify-content-start align-items-center" data-bs-toggle="collapse" href="#checklist-container<?= $entry->ID; ?>" role="button">
+                        <i class="fa-regular fa-list-check me-2"></i>Checklist
+                    </button>
+
+                    <button class="btn btn-sm btn-info text-white my-1 d-flex justify-content-start align-items-center" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" role="button">
+                        <i class="fa-light fa-notes me-2"></i>Notes
+                    </button>
+                </div>
             </td>
             <td><?= esc_html($pet_name) ?></td>
             <td><?= esc_html($applicant_names); ?></td>
@@ -85,6 +96,28 @@ function generate_table_rows()
             <td><?= esc_html($application_date); ?></td>
             <td>
                 <?php include plugin_dir_path(__FILE__) . 'approve-deny-buttons.php'; ?>
+            </td>
+        </tr>
+        <tr>
+            <td class="p-0" colspan="6">
+                <div id="checklist-container<?= $entry->ID ?>" class="p-3 collapse">
+                    <div class="bg-info rounded p-3">
+                        <h5 class="pb-2 border-bottom text-light">
+                            <i class="fa-regular fa-list-check me-2"></i>Checklist
+                        </h5>
+
+                        <button class="btn btn-sm btn-light" data-bs-toggle="collapse" href="#checklist-container<?= $entry->ID; ?>" role="button">Close</button>
+                    </div>
+                </div>
+                <div id="note-container<?= $entry->ID ?>" class="p-3 collapse">
+                    <div class="bg-info rounded p-3">
+                        <h5 class="pb-2 border-bottom text-light">
+                            <i class="fa-light fa-notes me-2 fa-2x"></i>Notes
+                        </h5>
+
+                        <button class="btn btn-sm btn-light" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" role="button">Close</button>
+                    </div>
+                </div>
             </td>
         </tr>
 <?php endforeach;

@@ -60,7 +60,7 @@ function cosmoscause_add_scripts()
         'base_url' => get_site_url()
     ));
 
-    wp_enqueue_script('cosmoscause-plugin-js', plugins_url('js/script.js', __FILE__), array('datatables-js', 'datatables-bs5-js'), '1.0', true);
+    wp_enqueue_script('cosmoscause-plugin-js', plugins_url('js/datatables.js', __FILE__), array('datatables-js', 'datatables-bs5-js'), '1.0', true);
 }
 add_action('admin_enqueue_scripts', 'cosmoscause_add_scripts');
 
