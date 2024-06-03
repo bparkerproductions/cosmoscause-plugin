@@ -1,8 +1,11 @@
 <div id="note-container<?= $entry->ID ?>" class="my-2 collapse">
     <div class="bg-info rounded p-3">
-        <h5 class="pb-2 border-bottom text-light">
-            <i class="fa-light fa-notes me-2 fa-2x"></i>Notes for <?= $applicant_names; ?>
-        </h5>
+        <div class="d-flex justify-content-between pb-2 mb-3 border-bottom">
+            <h5 class="text-light">
+                <i class="fa-light fa-notes me-2 fa-2x"></i>Notes for <?= $applicant_names; ?>
+            </h5>
+            <i class="fa-regular fa-xmark fa-lg text-light cursor-pointer" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" role="button"></i>
+        </div>
 
         <div class="my-2">
             <?php
