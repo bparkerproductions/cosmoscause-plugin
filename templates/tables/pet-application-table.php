@@ -54,7 +54,7 @@ function generate_table_rows()
                         <i class="fa-regular fa-list-check me-2"></i>Checklist
                     </button>
 
-                    <button class="btn btn-sm btn-info text-white my-1 d-flex justify-content-start align-items-center" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" role="button">
+                    <button class="btn btn-sm btn-info text-white my-1 d-flex justify-content-start align-items-center open-notes-btn" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" data-entry-id="<?= $entry->ID; ?>" role="button">
                         <i class="fa-light fa-notes me-2"></i>Notes
                     </button>
                 </div>
@@ -73,7 +73,7 @@ function generate_table_rows()
                 <div class="my-1">
                     <?php if ($reference_name) : ?>
                         <a class="me-2 text-decoration-none" href="tel:<?= esc_html($reference_phone) ?>" title="Reference Phone Number>
-                            <span class=" me-2"><i class="fa-duotone fa-phone"></i></span><?= $reference_name ?>(Reference)
+                            <span class=" me-2"><i class="fa-duotone fa-phone me-2"></i></span><?= $reference_name ?> <span class="fst-italic fs-sm">(Reference)</span>
                         </a>
                     <?php else : ?>
                         <p class="text-black-50 fst-italic">No reference provided</p>
@@ -85,7 +85,7 @@ function generate_table_rows()
                             $vet_name = $vet['Name'];
                             $vet_phone = $vet['Phone Number']; ?>
                             <a class="me-2 text-decoration-none" href="tel:<?= esc_html($vet_phone) ?>" title="Veterinarian Phone Number">
-                                <span class="me-2"><i class="fa-duotone fa-phone"></i></span><?= $vet_name ?>(Veterinarian)
+                                <span class="me-2"><i class="fa-duotone fa-phone"></i></span><?= $vet_name ?> <span class="fst-italic fs-sm">(Veterinarian)</span>
                             </a>
                         <?php endforeach;
                     else : ?>

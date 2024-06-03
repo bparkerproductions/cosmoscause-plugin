@@ -1,4 +1,5 @@
 /* Hide Sections */
+
 .postbox#notes {
   display: none;
 }
@@ -6,4 +7,17 @@
 /* Edit MCE areas in the datatables */
 .dataTable .mce-edit-area iframe {
   min-height: 250px;
+}
+
+/* CSS for entries datatables and approve buttons */
+.entry-status {
+  background-color: #b9a4aa;
+}
+
+.entry-status.denied {
+  background-color: #ff4e4e;
+}
+
+.entry-status.approved {
+  background-color: #65c9bb;
 }

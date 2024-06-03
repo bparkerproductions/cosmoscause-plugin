@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 add_action('rest_api_init', function () {
     register_rest_route('cosmoscause-plugin/v1', '/approve-entry/(?P<post_id>\d+)', array(
         'methods' => 'POST',
-        'callback' => 'cosmoscause_plugin_approve_entry',
+        'callback' => 'cosmoscause_approve_entry',
         'permission_callback' => function () {
             return current_user_can('manage_options');
         }
@@ -22,14 +22,14 @@ add_action('rest_api_init', function () {
 
     register_rest_route('cosmoscause-plugin/v1', '/deny-entry/(?P<post_id>\d+)', array(
         'methods' => 'POST',
-        'callback' => 'cosmoscause_plugin_deny_entry',
+        'callback' => 'cosmoscause_deny_entry',
         'permission_callback' => function () {
             return current_user_can('manage_options');
         }
     ));
 });
 
-function cosmoscause_plugin_approve_entry(WP_REST_Request $request)
+function cosmoscause_approve_entry(WP_REST_Request $request)
 {
     $newStatus = 'Approved';
     $post_id = intval($request->get_param('post_id'));
@@ -37,7 +37,7 @@ function cosmoscause_plugin_approve_entry(WP_REST_Request $request)
     return new WP_REST_Response(array('status' => $newStatus, 'updated_post_id' => $post_id), 200);
 }
 
-function cosmoscause_plugin_deny_entry(WP_REST_Request $request)
+function cosmoscause_deny_entry(WP_REST_Request $request)
 {
     $newStatus = 'Denied';
     $post_id = intval($request->get_param('post_id'));

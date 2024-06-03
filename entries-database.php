@@ -71,6 +71,7 @@ function cosmoscause_sync_pet_applications($form_id)
 
         $meta_array = array(
             '_gf_entry_id' => $entry_id,
+            '_entry_notes' => '',
             '_applicant_approval_status' => 'Pending',
             '_pet_name' => rgar($entry, 4),
             '_applicant_rent_status' => rgar($entry, 12),
@@ -121,6 +122,7 @@ function cosmoscause_sync_foster_applications($form_id)
         $application_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}");
         $meta_array = array(
             '_gf_entry_id' => $entry_id,
+            '_entry_notes' => '',
             '_applicant_approval_status' => 'Pending',
             '_applicant_names' => rgar($entry, 8),
             '_applicant_phone_number' => rgar($entry, 49),

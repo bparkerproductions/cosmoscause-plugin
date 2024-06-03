@@ -63,12 +63,21 @@ function cosmoscause_add_scripts()
         'base_url' => get_site_url()
     ));
 
+    wp_enqueue_script('cosmoscause-notes-script', plugins_url('js/notes.js', __FILE__), array(), null, true);
+    wp_localize_script('cosmoscause-notes-script', 'ajax_object', array(
+        'nonce' => wp_create_nonce('wp_rest'),
+        'base_url' => get_site_url()
+    ));
+
     wp_enqueue_script('cosmoscause-plugin-js', plugins_url('js/datatables.js', __FILE__), array('datatables-js', 'datatables-bs5-js'), '1.0', true);
 }
 add_action('admin_enqueue_scripts', 'cosmoscause_add_scripts');
 
-// Approval endpoints and functions
-include plugin_dir_path(__FILE__) . 'approval.php';
+/**
+ * REST API modules: Approval, Notes
+ */
+include plugin_dir_path(__FILE__) . 'api/approval.php';
+include plugin_dir_path(__FILE__) . 'api/notes.php';
 
 /**
  * Create the database page functionality under the "Forms" section
