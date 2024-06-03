@@ -62,8 +62,7 @@
         tinyMCE.init({
           selector: "#custom_editor" + entryId,
           menubar: false,
-          toolbar:
-            "bold italic underline strikethrough | formatselect | bullist numlist | undo redo",
+          toolbar: "bold italic | formatselect | bullist numlist | undo redo",
           plugins: "lists",
           height: 300,
           setup: function (editor) {

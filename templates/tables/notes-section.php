@@ -18,7 +18,7 @@
         </div>
 
         <div class="mt-4">
-            <button class="text-light" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" role="button"><i class="fa-solid fa-circle-xmark me-2 text-dark"></i>Close</button>
+            <button class="btn btn-sm btn-light" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" role="button"><i class="fa-solid fa-circle-xmark me-2 text-dark"></i>Close</button>
         </div>
     </div>
 </div>
