@@ -35,7 +35,12 @@ function generate_table_rows()
         $phone_number = get_post_meta($entry->ID, '_applicant_phone_number', true);
         $email = get_post_meta($entry->ID, '_applicant_email', true);
         $application_date = get_post_meta($entry->ID, '_application_signature_date', true);
-        $application_url = get_post_meta($entry->ID, '_application_url', true); ?>
+        $application_url = get_post_meta($entry->ID, '_application_url', true);
+        $reference_name = get_post_meta($entry->ID, '_reference_name', true);
+        $reference_phone = get_post_meta($entry->ID, '_reference_phone', true);
+        $vet_name = get_post_meta($entry->ID, '_veterinarian_name', true);
+        $vet_phone = get_post_meta($entry->ID, '_veterinarian_phone', true); ?>
+
         <tr>
             <td>
                 <a class="text-decoration-none" href="<?= esc_url($application_url) ?>" target="_blank">
@@ -44,12 +49,16 @@ function generate_table_rows()
             </td>
             <td><?= esc_html($applicant_names); ?></td>
             <td>
-                <a class="me-2 text-decoration-none" href="mailto:<?= esc_html($email) ?>">
-                    <span class="me-2"><i class="fa-sharp fa-light fa-envelope"></i></span>Email
-                </a>
-                <a class="text-decoration-none" href="tel:<?= esc_html($phone_number) ?>">
-                    <span class="me-2"><i class="fa-duotone fa-phone"></i></span>Phone
-                </a>
+                <?php include plugin_dir_path(__FILE__) . 'parts/contact-info.php'; ?>
+                <div>
+                    <?php if ($vet_phone) : ?>
+                        <a class="text-decoration-none" href="tel:<?= esc_html($vet_phone) ?>" title="Veterinarian Phone Number">
+                            <span class="me-2"><i class="fa-duotone fa-phone"></i></span><?= $vet_name; ?> <span class="fst-italic fs-sm">(Veterinarian)</span>
+                        </a>
+                    <?php else : ?>
+                        <p class="text-black-50 fst-italic">No veterinarian provided</p>
+                    <?php endif; ?>
+                </div>
             </td>
             <td><?= esc_html($application_date); ?></td>
             <td>

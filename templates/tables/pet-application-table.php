@@ -62,23 +62,7 @@ function generate_table_rows()
             <td><?= esc_html($pet_name) ?></td>
             <td><?= esc_html($applicant_names); ?></td>
             <td>
-                <div>
-                    <a class="me-2 text-decoration-none" href="mailto:<?= esc_html($email) ?>" title="Applicant Email">
-                        <span class="me-2"><i class="fa-sharp fa-light fa-envelope"></i></span>Email
-                    </a>
-                    <a class="text-decoration-none" href="tel:<?= esc_html($phone_number) ?>" title="Applicant Phone Number">
-                        <span class="me-2"><i class="fa-duotone fa-phone"></i></span>Phone
-                    </a>
-                </div>
-                <div class="my-1">
-                    <?php if ($reference_name) : ?>
-                        <a class="me-2 text-decoration-none" href="tel:<?= esc_html($reference_phone) ?>" title="Reference Phone Number>
-                            <span class=" me-2"><i class="fa-duotone fa-phone me-2"></i></span><?= $reference_name ?> <span class="fst-italic fs-sm">(Reference)</span>
-                        </a>
-                    <?php else : ?>
-                        <p class="text-black-50 fst-italic">No reference provided</p>
-                    <?php endif; ?>
-                </div>
+                <?php include plugin_dir_path(__FILE__) . 'parts/contact-info.php'; ?>
                 <div class="my-1">
                     <?php if ($veterinatian_list !== false) :
                         foreach ($veterinatian_list as $vet) :

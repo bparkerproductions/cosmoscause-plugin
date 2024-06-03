@@ -129,6 +129,10 @@ function cosmoscause_sync_foster_applications($form_id)
             '_applicant_email' => rgar($entry, 11),
             '_applicant_address' => rgar($entry, 6),
             '_application_signature_date' => rgar($entry, 44),
+            '_reference_name' => rgar($entry, 37),
+            '_reference_phone' => rgar($entry, 50),
+            '_veterinarian_name' => rgar($entry, 42),
+            '_veterinarian_phone' => rgar($entry, 36),
             '_application_url' => $application_url,
         );
 
