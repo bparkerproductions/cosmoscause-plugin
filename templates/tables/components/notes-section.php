@@ -1,4 +1,4 @@
-<div id="note-container<?= $entry->ID ?>" class="p-3 collapse">
+<div id="note-container<?= $entry->ID ?>" class="my-2 collapse">
     <div class="bg-info rounded p-3">
         <h5 class="pb-2 border-bottom text-light">
             <i class="fa-light fa-notes me-2 fa-2x"></i>Notes for <?= $applicant_names; ?>
@@ -13,7 +13,7 @@
                     <i class="fa-solid fa-floppy-disk text-dark me-2"></i>Save Notes
                     <span class="btn__loader"><i class="fa-regular fa-loader fa-spin"></i></span>
                 </button>
-                <p class="notes__save-message mt-2 text-white mb-0 d-none">Notes saved.</p>
+                <p data-entry-id="<?= $entry->ID; ?>" class="notes__save-message mt-2 text-white mb-0 d-none">Notes saved.</p>
             </div>
         </div>
 

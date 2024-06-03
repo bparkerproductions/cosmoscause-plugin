@@ -21,3 +21,13 @@
 .entry-status.approved {
   background-color: #65c9bb;
 }
+
+.dataTable {
+  table-layout: fixed;
+  width: 90px;
+}
+
+.table__component-container {
+  position: relative;
+  width: 80vw;
+}

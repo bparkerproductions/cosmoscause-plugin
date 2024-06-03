@@ -43,9 +43,11 @@ function generate_table_rows()
 
         <tr>
             <td>
-                <a class="text-decoration-none" href="<?= esc_url($application_url) ?>" target="_blank">
-                    <i class="fa-regular fa-arrow-up-right-from-square"></i> <?= $entry_id ?>
-                </a>
+                <?php include plugin_dir_path(__FILE__) . 'parts/entry-ui-buttons.php'; ?>
+                <div class="table__component-container">
+                    <?php include plugin_dir_path(__FILE__) . 'components/checklist-section.php'; ?>
+                    <?php include plugin_dir_path(__FILE__) . 'components/notes-section.php'; ?>
+                </div>
             </td>
             <td><?= esc_html($applicant_names); ?></td>
             <td>
@@ -62,7 +64,7 @@ function generate_table_rows()
             </td>
             <td><?= esc_html($application_date); ?></td>
             <td>
-                <?php include plugin_dir_path(__FILE__) . 'approve-deny-buttons.php'; ?>
+                <?php include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php'; ?>
             </td>
         </tr>
 <?php endforeach;

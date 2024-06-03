@@ -42,28 +42,20 @@ function generate_table_rows()
         $reference_phone = get_post_meta($entry->ID, '_reference_phone', true);
         $veterinatian_list = unserialize(get_post_meta($entry->ID, '_veterinarian_list', true));
         $application_url = get_post_meta($entry->ID, '_application_url', true); ?>
-        <tr>
+        <tr class="position-relative">
             <td>
-                <div class="d-flex flex-column">
-                    <a class="text-decoration-none" href="<?= esc_url($application_url) ?>" target="_blank">
-                        <i class="fa-regular fa-arrow-up-right-from-square"></i> <?= $entry_id ?>
-                    </a>
-
-                    <!-- Toggle UI Buttons -->
-                    <button class="btn btn-sm btn-info text-white my-1 d-flex justify-content-start align-items-center" data-bs-toggle="collapse" href="#checklist-container<?= $entry->ID; ?>" role="button">
-                        <i class="fa-regular fa-list-check me-2"></i>Checklist
-                    </button>
-
-                    <button class="btn btn-sm btn-info text-white my-1 d-flex justify-content-start align-items-center open-notes-btn" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" data-entry-id="<?= $entry->ID; ?>" role="button">
-                        <i class="fa-light fa-notes me-2"></i>Notes
-                    </button>
+                <?php include plugin_dir_path(__FILE__) . 'parts/entry-ui-buttons.php'; ?>
+                <div class="table__component-container">
+                    <?php include plugin_dir_path(__FILE__) . 'components/checklist-section.php'; ?>
+                    <?php include plugin_dir_path(__FILE__) . 'components/notes-section.php'; ?>
                 </div>
             </td>
             <td><?= esc_html($pet_name) ?></td>
             <td><?= esc_html($applicant_names); ?></td>
             <td>
                 <?php include plugin_dir_path(__FILE__) . 'parts/contact-info.php'; ?>
-                <div class="my-1">
+
+                <div class=" my-1">
                     <?php if ($veterinatian_list !== false) :
                         foreach ($veterinatian_list as $vet) :
                             $vet_name = $vet['Name'];
@@ -79,22 +71,9 @@ function generate_table_rows()
             </td>
             <td><?= esc_html($application_date); ?></td>
             <td>
-                <?php include plugin_dir_path(__FILE__) . 'approve-deny-buttons.php'; ?>
+                <?php include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php'; ?>
             </td>
         </tr>
-        <tr>
-            <td class="p-0" colspan="6">
-                <div id="checklist-container<?= $entry->ID ?>" class="p-3 collapse">
-                    <div class="bg-info rounded p-3">
-                        <h5 class="pb-2 border-bottom text-light">
-                            <i class="fa-regular fa-list-check me-2"></i>Checklist
-                        </h5>
 
-                        <button class="btn btn-sm btn-light" data-bs-toggle="collapse" href="#checklist-container<?= $entry->ID; ?>" role="button">Close</button>
-                    </div>
-                </div>
-                <?php include plugin_dir_path(__FILE__) . 'notes-section.php'; ?>
-            </td>
-        </tr>
 <?php endforeach;
 }

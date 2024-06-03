@@ -26,7 +26,13 @@
         )
           .then((response) => response.json())
           .then((data) => {
-            const saveMsg = document.querySelector(".notes__save-message");
+            const saveMsg = document.querySelector(
+              `.notes__save-message[data-entry-id="${entryId}"]`
+            );
+            console.log(
+              `.notes__save-message[data-entry-id="${entryId}"]`,
+              saveMsg
+            );
 
             // Display success message after a second of "loading"
             setTimeout(
