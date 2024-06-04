@@ -11,9 +11,9 @@
     </a>
 
     <!-- Toggle UI Buttons -->
-    <button class="btn btn-sm btn-info text-white my-1 d-flex justify-content-start align-items-center" data-bs-toggle="collapse" href="#checklist-container<?= $entry->ID; ?>" role="button">
+    <!-- <button class="btn btn-sm btn-info text-white my-1 d-flex justify-content-start align-items-center" data-bs-toggle="collapse" href="#checklist-container<?= $entry->ID; ?>" role="button">
         <i class="fa-regular fa-list-check me-2"></i>Checklist
-    </button>
+    </button> -->
 
     <button class="btn btn-sm btn-info text-white my-1 d-flex justify-content-start align-items-center open-notes-btn" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" data-entry-id="<?= $entry->ID; ?>" role="button">
         <i class="fa-light fa-notes me-2"></i>Notes

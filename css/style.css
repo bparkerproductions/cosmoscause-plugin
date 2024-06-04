@@ -4,11 +4,6 @@
   display: none;
 }
 
-/* Edit MCE areas in the datatables */
-.dataTable .mce-edit-area iframe {
-  min-height: 250px;
-}
-
 /* CSS for entries datatables and approve buttons */
 .entry-status {
   background-color: #b9a4aa;
@@ -22,12 +17,17 @@
   background-color: #65c9bb;
 }
 
+/* Datatable modifications */
 .dataTable {
   table-layout: fixed;
   width: 90px;
-}
 
-.table__component-container {
-  position: relative;
-  width: 80vw;
+  td {
+    font-size: 0.95em !important;
+  }
+
+  .table__component-container {
+    position: relative;
+    width: 80vw;
+  }
 }

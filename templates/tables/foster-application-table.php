@@ -45,7 +45,6 @@ function generate_table_rows()
             <td>
                 <?php include plugin_dir_path(__FILE__) . 'parts/entry-ui-buttons.php'; ?>
                 <div class="table__component-container">
-                    <?php include plugin_dir_path(__FILE__) . 'components/checklist-section.php'; ?>
                     <?php include plugin_dir_path(__FILE__) . 'components/notes-section.php'; ?>
                 </div>
             </td>

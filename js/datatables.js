@@ -10,10 +10,19 @@
         "pet-application-table"
       );
       if (petApplicationTable) {
-        new DataTable(petApplicationTable, {
+        const table = new DataTable(petApplicationTable, {
           paging: false,
           searching: true,
           ordering: true,
+          initComplete: function (settings, json) {
+            // Set an initial search value
+            const url = new URL(window.location.href);
+            const searchParams = new URLSearchParams(url.search);
+            const searchValue = searchParams.get("search");
+            if (searchValue) {
+              this.api().search(searchValue).draw();
+            }
+          },
         });
       }
 

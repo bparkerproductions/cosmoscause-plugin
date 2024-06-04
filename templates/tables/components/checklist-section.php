@@ -4,7 +4,7 @@
             <h5 class="text-light">
                 <i class="fa-regular fa-list-check me-2"></i>Checklist
             </h5>
-            <i class="fa-regular fa-xmark fa-lg text-light cursor-pointer" data-bs-toggle="collapse" href="#note-container<?= $entry->ID; ?>" role="button"></i>
+            <i class="fa-regular fa-xmark fa-lg text-light cursor-pointer" data-bs-toggle="collapse" href="#checklist-container<?= $entry->ID; ?>" role="button"></i>
         </div>
 
 
