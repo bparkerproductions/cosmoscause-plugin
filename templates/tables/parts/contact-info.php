@@ -5,7 +5,6 @@
     <a class="text-decoration-none" href="tel:<?= esc_html($phone_number) ?>" title="Applicant Phone Number">
         <span class="me-2"><i class="fa-duotone fa-phone"></i></span>Phone
     </a>
-    <span class="fst-italic fs-sm text-black-50">(Applicant)</span>
 </div>
 <div class="my-1">
     <?php if ($reference_name) : ?>

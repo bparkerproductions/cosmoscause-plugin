@@ -14,14 +14,9 @@
           paging: false,
           searching: true,
           ordering: true,
+          order: [[0, "desc"]],
           initComplete: function (settings, json) {
-            // Set an initial search value
-            const url = new URL(window.location.href);
-            const searchParams = new URLSearchParams(url.search);
-            const searchValue = searchParams.get("search");
-            if (searchValue) {
-              this.api().search(searchValue).draw();
-            }
+            setInitialSearch();
           },
         });
       }
@@ -35,7 +30,17 @@
           paging: false,
           searching: true,
           ordering: true,
+          order: [0, "desc"],
         });
+      }
+    }
+
+    function setInitialSearch() {
+      const url = new URL(window.location.href);
+      const searchParams = new URLSearchParams(url.search);
+      const searchValue = searchParams.get("search");
+      if (searchValue) {
+        this.api().search(searchValue).draw();
       }
     }
   });
