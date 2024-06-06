@@ -41,7 +41,9 @@ function generate_table_rows()
         $reference_name = get_post_meta($entry->ID, '_reference_name', true);
         $reference_phone = get_post_meta($entry->ID, '_reference_phone', true);
         $veterinatian_list = unserialize(get_post_meta($entry->ID, '_veterinarian_list', true));
-        $application_url = get_post_meta($entry->ID, '_application_url', true); ?>
+        $application_url = get_post_meta($entry->ID, '_application_url', true);
+        $contract_started = get_post_meta($entry->ID, '_contract_started', true);
+    ?>
         <tr class="position-relative">
             <td>
                 <?php include plugin_dir_path(__FILE__) . 'parts/entry-ui-buttons.php'; ?>
@@ -73,8 +75,12 @@ function generate_table_rows()
                 <?php include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php'; ?>
 
                 <div class="contract-generation">
-                    <button role="button" class="btn btn-sm btn-info text-white contract-generation__button">Start Contract Process</button>
-                    <a data-phone-number="<?= $phone_number; ?>" data-email="<?= $email; ?>" data-applicant-name="<?= $applicant_names; ?>" data-pet-name="<?= $pet_name ?>" target="_blank" class="contract-generation__link d-none" href="#">Contract Link</a>
+                    <?php var_dump($contract_started); ?>
+                    <?php if ($applicant_approval_status === 'Approved') : ?>
+                        <button role="button" class="btn btn-sm btn-info text-white contract-generation__button">Start Contract Process</button>
+
+                        <a data-phone-number="<?= $phone_number; ?>" data-email="<?= $email; ?>" data-applicant-name="<?= $applicant_names; ?>" data-pet-name="<?= $pet_name ?>" target="_blank" class="contract-generation__link d-none" href="#">Contract Link</a>
+                    <?php endif; ?>
                 </div>
             </td>
         </tr>

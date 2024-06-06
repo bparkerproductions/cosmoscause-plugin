@@ -89,13 +89,18 @@ function cosmoscause_sync_pet_applications($form_id)
 
         // Create a new CPT entry
         if (empty($existing_post_id)) {
-            wp_insert_post(array(
+            // Insert the post
+            $existing_post_id = wp_insert_post(array(
                 'post_type' => 'application_entry',
                 'post_title' => 'Pet application entry ' . $entry_id . ':',
                 'post_status' => 'publish',
                 'meta_input' => $meta_array
             ));
         }
+
+
+        // Then go through and update/add post meta values
+        add_meta_to_existing_cpt($existing_post_id, '_contract_started', "not started");
     }
 }
 
@@ -145,6 +150,28 @@ function cosmoscause_sync_foster_applications($form_id)
                 'meta_input' => $meta_array,
             ));
         }
+    }
+}
+
+// Adds a post meta to a post type if it doesn't exist already
+function add_meta_to_existing_cpt($the_post, $meta_key, $meta_value)
+{
+    $post_id = is_array($the_post) ? $the_post[0] : $the_post;
+
+    if (!metadata_exists('post', $post_id, $meta_key)) {
+        // Add the meta key with the specified value
+        add_post_meta($post_id, $meta_key, $meta_value, true);
+    }
+}
+
+// Adds a post meta to a post type if it doesn't exist already
+function delete_meta_for_existing_cpt($the_post, $meta_key)
+{
+    $post_id = is_array($the_post) ? $the_post[0] : $the_post;
+
+    if (metadata_exists('post', $post_id, $meta_key)) {
+        // Add the meta key with the specified value
+        delete_post_meta($post_id, $meta_key);
     }
 }
 
