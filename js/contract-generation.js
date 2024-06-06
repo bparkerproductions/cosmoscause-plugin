@@ -5,7 +5,10 @@
       btn.addEventListener("click", function () {
         const parent = this.closest(".contract-generation");
         const linkField = parent.querySelector(".contract-generation__link");
-        linkField.classList.remove("d-none");
+        const linkFieldContainer = parent.querySelector(
+          ".contract-generation__link-container"
+        );
+        linkFieldContainer.classList.remove("d-none");
 
         generateLink(linkField);
       });
@@ -15,16 +18,17 @@
       const baseUrl = ajax_object.base_url + "/pet-application-contract/?";
 
       const queryParams = {
-        email: linkField.getAttribute("data-email"),
-        phone: linkField.getAttribute("data-phone-number"),
-        applicant_name: linkField.getAttribute("data-applicant-name"),
-        dog_name: linkField.getAttribute("data-pet-name"),
+        email: linkField.getAttribute("data-email") || "",
+        phone: linkField.getAttribute("data-phone-number") || "",
+        applicant_name: linkField.getAttribute("data-applicant-name") || "",
+        dog_name: linkField.getAttribute("data-pet-name") || "",
       };
 
       const url = new URL(baseUrl);
       const params = new URLSearchParams(queryParams);
 
       url.search = params.toString();
+      console.log(url.toString());
 
       linkField.href = url.toString();
     }
