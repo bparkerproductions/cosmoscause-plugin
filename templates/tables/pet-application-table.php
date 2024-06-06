@@ -71,6 +71,11 @@ function generate_table_rows()
             <td><?= esc_html($application_date); ?></td>
             <td>
                 <?php include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php'; ?>
+
+                <div class="contract-generation">
+                    <button role="button" class="btn btn-sm btn-info text-white contract-generation__button">Start Contract Process</button>
+                    <a data-phone-number="<?= $phone_number; ?>" data-email="<?= $email; ?>" data-applicant-name="<?= $applicant_names; ?>" data-pet-name="<?= $pet_name ?>" target="_blank" class="contract-generation__link d-none" href="#">Contract Link</a>
+                </div>
             </td>
         </tr>
 
