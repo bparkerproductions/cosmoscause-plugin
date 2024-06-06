@@ -10,12 +10,12 @@
         "pet-application-table"
       );
       if (petApplicationTable) {
-        const table = new DataTable(petApplicationTable, {
+        new DataTable(petApplicationTable, {
           paging: false,
           searching: true,
           ordering: true,
-          order: [[0, "desc"]],
-          initComplete: function (settings, json) {
+          order: [[4, "desc"]],
+          initComplete: function () {
             setInitialSearch();
           },
         });
@@ -30,7 +30,10 @@
           paging: false,
           searching: true,
           ordering: true,
-          order: [0, "desc"],
+          order: [3, "desc"],
+          initComplete: function () {
+            setInitialSearch();
+          },
         });
       }
     }

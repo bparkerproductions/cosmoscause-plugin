@@ -8,9 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * Register REST API endpoints
- */
+// Register REST API endpoints
 add_action('rest_api_init', function () {
     register_rest_route('cosmoscause-plugin/v1', '/send-contract-link', array(
         'methods' => 'POST',

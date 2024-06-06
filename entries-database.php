@@ -83,13 +83,11 @@ function cosmoscause_sync_pet_applications($form_id)
             '_applicant_names' => list_items(rgar($entry, 48)),
             '_applicant_phone_number' => rgar($entry, 7),
             '_applicant_email' => rgar($entry, 8),
-            '_application_date' => rgar($entry, 47),
             '_application_url' => $application_url
         );
 
         // Create a new CPT entry
         if (empty($existing_post_id)) {
-            // Insert the post
             $existing_post_id = wp_insert_post(array(
                 'post_type' => 'application_entry',
                 'post_title' => 'Pet application entry ' . $entry_id . ':',
@@ -101,6 +99,7 @@ function cosmoscause_sync_pet_applications($form_id)
 
         // Then go through and update/add post meta values
         add_meta_to_existing_cpt($existing_post_id, '_contract_started', "not started");
+        add_meta_to_existing_cpt($existing_post_id, '_gf_entry_date', $entry['date_created']);
     }
 }
 
@@ -143,13 +142,17 @@ function cosmoscause_sync_foster_applications($form_id)
 
         // Create a new CPT entry
         if (empty($existing_post_id)) {
-            wp_insert_post(array(
+            $existing_post_id = wp_insert_post(array(
                 'post_type' => 'foster_entry',
                 'post_title' => 'Foster Entry ' . $entry_id . ':',
                 'post_status' => 'publish',
                 'meta_input' => $meta_array,
             ));
         }
+
+        // Then go through and update/add post meta values
+        add_meta_to_existing_cpt($existing_post_id, '_contract_started', "not started");
+        add_meta_to_existing_cpt($existing_post_id, '_gf_entry_date', $entry['date_created']);
     }
 }
 

@@ -37,12 +37,11 @@ function generate_table_rows()
         $applicant_names = get_post_meta($entry->ID, '_applicant_names', true);
         $phone_number = get_post_meta($entry->ID, '_applicant_phone_number', true);
         $email = get_post_meta($entry->ID, '_applicant_email', true);
-        $application_date = get_post_meta($entry->ID, '_application_date', true);
+        $application_date = get_post_meta($entry->ID, '_gf_entry_date', true);
         $reference_name = get_post_meta($entry->ID, '_reference_name', true);
         $reference_phone = get_post_meta($entry->ID, '_reference_phone', true);
         $veterinatian_list = unserialize(get_post_meta($entry->ID, '_veterinarian_list', true));
         $application_url = get_post_meta($entry->ID, '_application_url', true);
-        $contract_started = get_post_meta($entry->ID, '_contract_started', true);
     ?>
         <tr class="position-relative">
             <td>
@@ -70,14 +69,15 @@ function generate_table_rows()
                     <?php endif; ?>
                 </div>
             </td>
-            <td><?= esc_html($application_date); ?></td>
+            <td>
+                <span class="fst-italic fs-sm"><?= esc_html($application_date); ?></span>
+            </td>
             <td>
                 <div class="actions-container">
                     <?php include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php'; ?>
 
-                    <hr>
-
                     <div class="contract-generation <?= $applicant_approval_status !== 'Approved' ? 'd-none' : ''; ?>">
+                        <hr>
                         <div class="mt-2">
                             <button role="button" class="btn btn-sm btn-info text-white contract-generation__button">Get Contract Link</button>
 
