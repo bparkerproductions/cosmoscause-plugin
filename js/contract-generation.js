@@ -10,7 +10,19 @@
         );
         linkFieldContainer.classList.remove("d-none");
 
-        generateLink(linkField);
+        const generatedLink = generateLink(linkField);
+
+        // Activate the listener for sending the applicant the generated link
+        const emailButton = parent.querySelector(".contract-generation__email");
+        emailButton.addEventListener("click", function () {
+          const recipientEmail = emailButton.getAttribute(
+            "data-recipient-email"
+          );
+
+          if (recipientEmail && generatedLink) {
+            sendContractLink(recipientEmail, generatedLink, parent);
+          }
+        });
       });
     });
 
@@ -28,9 +40,46 @@
       const params = new URLSearchParams(queryParams);
 
       url.search = params.toString();
-      console.log(url.toString());
 
       linkField.href = url.toString();
+
+      return url.toString();
+    }
+
+    function sendContractLink(email, url, parent) {
+      fetch(
+        ajax_object.base_url +
+          "/wp-json/cosmoscause-plugin/v1/send-contract-link/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-WP-Nonce": ajax_object.nonce,
+          },
+          body: JSON.stringify({
+            url,
+            email,
+          }),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const messegeEl = parent.querySelector(
+            ".contract-generation__message"
+          );
+          messegeEl.classList.remove("d-none");
+          messegeEl.innerText = data.message;
+
+          if (data.status === "success") {
+            messegeEl.classList.add("text-success");
+          }
+          if (data.status === "error") {
+            messegeEl.classList.add("text-error");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
   });
 })();

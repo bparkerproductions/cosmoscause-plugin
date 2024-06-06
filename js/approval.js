@@ -21,7 +21,13 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.status === "Approved") {
+              const parent = this.closest(".actions-container");
+
               // Update button state and status text
+              parent
+                .querySelector(".contract-generation")
+                .classList.remove("d-none");
+
               entryStatus(postId).textContent = "Approved";
               entryStatus(postId).style.backgroundColor = "#65c9bb";
               approvedBtn(postId).classList.add("d-none");
@@ -51,7 +57,12 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.status === "Denied") {
+              const parent = this.closest(".actions-container");
+
               // Update button state and status text
+              parent
+                .querySelector(".contract-generation")
+                .classList.add("d-none");
               approvedBtn(postId).classList.remove("d-none");
               deniedBtn(postId).classList.add("d-none");
               entryStatus(postId).textContent = "Denied";
@@ -72,8 +83,15 @@
           const buttonContainer = parent.querySelector(
             ".approve-buttons__buttons"
           );
-          buttonContainer.classList.remove("d-none");
-          buttonContainer.classList.add("d-flex");
+
+          // Toggle buttons
+          if (buttonContainer.classList.contains("d-none")) {
+            buttonContainer.classList.remove("d-none");
+            buttonContainer.classList.add("d-flex");
+          } else {
+            buttonContainer.classList.add("d-none");
+            buttonContainer.classList.remove("d-flex");
+          }
         });
       });
 

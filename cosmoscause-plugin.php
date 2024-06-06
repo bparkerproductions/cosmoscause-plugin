@@ -80,10 +80,11 @@ function cosmoscause_add_scripts()
 add_action('admin_enqueue_scripts', 'cosmoscause_add_scripts');
 
 /**
- * REST API modules: Approval, Notes
+ * REST API modules: Approval, Notes, Email
  */
 include plugin_dir_path(__FILE__) . 'api/approval.php';
 include plugin_dir_path(__FILE__) . 'api/notes.php';
+include plugin_dir_path(__FILE__) . 'api/email.php';
 
 /**
  * Create the database page functionality under the "Forms" section
