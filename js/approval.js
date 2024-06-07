@@ -23,10 +23,13 @@
             if (data.status === "Approved") {
               const parent = this.closest(".actions-container");
 
+              const contractGeneration = parent.querySelector(
+                ".contract-generation"
+              );
               // Update button state and status text
-              parent
-                .querySelector(".contract-generation")
-                .classList.remove("d-none");
+
+              if (contractGeneration)
+                contractGeneration.classList.remove("d-none");
 
               entryStatus(postId).textContent = "Approved";
               entryStatus(postId).style.backgroundColor = "#65c9bb";
@@ -58,11 +61,13 @@
           .then((data) => {
             if (data.status === "Denied") {
               const parent = this.closest(".actions-container");
+              const contractGeneration = parent.querySelector(
+                ".contract-generation"
+              );
 
               // Update button state and status text
-              parent
-                .querySelector(".contract-generation")
-                .classList.add("d-none");
+              if (contractGeneration)
+                contractGeneration.classList.add("d-none");
               approvedBtn(postId).classList.remove("d-none");
               deniedBtn(postId).classList.add("d-none");
               entryStatus(postId).textContent = "Denied";

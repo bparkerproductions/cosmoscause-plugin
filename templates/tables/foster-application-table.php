@@ -63,7 +63,9 @@ function generate_table_rows()
             </td>
             <td><?= esc_html($application_date); ?></td>
             <td>
-                <?php include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php'; ?>
+                <div class="actions-container">
+                    <?php include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php'; ?>
+                </div>
             </td>
         </tr>
 <?php endforeach;
