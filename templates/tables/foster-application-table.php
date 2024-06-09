@@ -34,7 +34,7 @@ function generate_table_rows()
         $applicant_names = get_post_meta($entry->ID, '_applicant_names', true);
         $phone_number = get_post_meta($entry->ID, '_applicant_phone_number', true);
         $email = get_post_meta($entry->ID, '_applicant_email', true);
-        $application_date = get_post_meta($entry->ID, '_application_signature_date', true);
+        $application_date = get_post_meta($entry->ID, '_gf_entry_date', true);
         $application_url = get_post_meta($entry->ID, '_application_url', true);
         $reference_name = get_post_meta($entry->ID, '_reference_name', true);
         $reference_phone = get_post_meta($entry->ID, '_reference_phone', true);

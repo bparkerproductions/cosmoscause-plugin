@@ -35,6 +35,7 @@ function generate_table_rows()
         $applicant_approval_status = get_post_meta($entry->ID, '_applicant_approval_status', true);
         $pet_name = get_post_meta($entry->ID, '_pet_name', true);
         $applicant_names = get_post_meta($entry->ID, '_applicant_names', true);
+        $applicant_address = get_post_meta($entry->ID, '_applicant_address', true);
         $phone_number = get_post_meta($entry->ID, '_applicant_phone_number', true);
         $email = get_post_meta($entry->ID, '_applicant_email', true);
         $application_date = get_post_meta($entry->ID, '_gf_entry_date', true);
@@ -84,7 +85,7 @@ function generate_table_rows()
                             <div class="d-none contract-generation__link-container mt-2">
                                 <div class="d-flex align-items-center">
                                     <i class="fa-regular fa-arrow-up-right-from-square me-2 fa-sm text-dark"></i>
-                                    <a data-phone-number="<?= $phone_number; ?>" data-email="<?= $email; ?>" data-applicant-name="<?= $applicant_names; ?>" data-pet-name="<?= $pet_name ?>" target="_blank" class="contract-generation__link" href="#" title="Open Contract Link"> Contract Link</a>
+                                    <a data-address="<?= $applicant_address; ?>" data-phone-number="<?= $phone_number; ?>" data-email="<?= $email; ?>" data-applicant-name="<?= $applicant_names; ?>" data-pet-name="<?= $pet_name ?>" target="_blank" class="contract-generation__link" href="#" title="Open Contract Link"> Contract Link</a>
 
                                     <span class="contract-generation__email ms-2 cursor-pointer" data-recipient-email="<?= $email; ?>" title="Send contract link to <?= $email; ?>"><i class="fa-solid fa-envelope fa-2x text-info"></i></span>
                                 </div>

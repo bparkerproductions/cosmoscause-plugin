@@ -34,6 +34,7 @@
         phone: linkField.getAttribute("data-phone-number") || "",
         applicant_name: linkField.getAttribute("data-applicant-name") || "",
         dog_name: linkField.getAttribute("data-pet-name") || "",
+        address: linkField.getAttribute("data-address") || "",
       };
 
       const url = new URL(baseUrl);

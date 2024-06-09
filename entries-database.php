@@ -43,6 +43,7 @@ function cosmoscause_sync_gf_entries_to_cpt()
         return;
     }
 
+    // TODO refactor to rely on something besides the form_id
     cosmoscause_sync_pet_applications(1);
     cosmoscause_sync_foster_applications(2);
 }
@@ -67,39 +68,54 @@ function cosmoscause_sync_pet_applications($form_id)
             'fields' => 'ids'
         ));
 
-        $application_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}");
-
-        $meta_array = array(
-            '_gf_entry_id' => $entry_id,
-            '_entry_notes' => '',
-            '_applicant_approval_status' => 'Pending',
-            '_pet_name' => rgar($entry, 4),
-            '_applicant_rent_status' => rgar($entry, 12),
-            '_veterinarian_list' => rgar($entry, 26),
-            '_landlord_phone' => rgar($entry, 13),
-            '_landlord_email' => rgar($entry, 14),
-            '_reference_name' => rgar($entry, 49),
-            '_reference_phone' => rgar($entry, 50),
-            '_applicant_names' => list_items(rgar($entry, 48)),
-            '_applicant_phone_number' => rgar($entry, 7),
-            '_applicant_email' => rgar($entry, 8),
-            '_application_url' => $application_url
-        );
-
         // Create a new CPT entry
         if (empty($existing_post_id)) {
             $existing_post_id = wp_insert_post(array(
                 'post_type' => 'application_entry',
                 'post_title' => 'Pet application entry ' . $entry_id . ':',
                 'post_status' => 'publish',
-                'meta_input' => $meta_array
+                'meta_input' => array('_gf_entry_id' => $entry_id,)
             ));
         }
 
+        $street_address = rgar($entry, '6.1');
+        $address_line_2 = rgar($entry, '6.2');
+        $city = rgar($entry, '6.3');
+        $state = rgar($entry, '6.4');
+        $zip_code = rgar($entry, '6.5');
+        $country = rgar($entry, '6.6');
 
-        // Then go through and update/add post meta values
-        add_meta_to_existing_cpt($existing_post_id, '_contract_started', "not started");
+        // Combine the address components
+        $address = trim("$street_address $address_line_2 $city, $state $zip_code $country");
+        $application_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}");
+
+        /**
+         * Post meta values:
+         * Entry [notes, date] Pet name, Vet List,
+         * Landlord [Phone, Email], 
+         * Reference [Name, Phone]
+         * Applicant [Names, Phone, Approval Status, Email, Address]
+         * Application URL, Contract Started,
+         */
+        add_meta_to_existing_cpt($existing_post_id, '_entry_notes', "");
         add_meta_to_existing_cpt($existing_post_id, '_gf_entry_date', $entry['date_created']);
+        add_meta_to_existing_cpt($existing_post_id, '_pet_name', rgar($entry, 4));
+        add_meta_to_existing_cpt($existing_post_id, '_veterinarian_list', rgar($entry, 26));
+
+        add_meta_to_existing_cpt($existing_post_id, '_landlord_phone', rgar($entry, 13));
+        add_meta_to_existing_cpt($existing_post_id, '_landlord_email', rgar($entry, 14));
+
+        add_meta_to_existing_cpt($existing_post_id, '_reference_name', rgar($entry, 49));
+        add_meta_to_existing_cpt($existing_post_id, '_reference_phone', rgar($entry, 50));
+
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_names', list_items(rgar($entry, 48)));
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_phone_number', rgar($entry, 7));
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_approval_status', "Pending");
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_email', rgar($entry, 8));
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_address', $address);
+
+        add_meta_to_existing_cpt($existing_post_id, '_application_url', $application_url);
+        add_meta_to_existing_cpt($existing_post_id, '_contract_started', "not started");
     }
 }
 
@@ -123,36 +139,42 @@ function cosmoscause_sync_foster_applications($form_id)
             'fields' => 'ids'
         ));
 
-        $application_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}");
-        $meta_array = array(
-            '_gf_entry_id' => $entry_id,
-            '_entry_notes' => '',
-            '_applicant_approval_status' => 'Pending',
-            '_applicant_names' => rgar($entry, 8),
-            '_applicant_phone_number' => rgar($entry, 49),
-            '_applicant_email' => rgar($entry, 11),
-            '_applicant_address' => rgar($entry, 6),
-            '_application_signature_date' => rgar($entry, 44),
-            '_reference_name' => rgar($entry, 37),
-            '_reference_phone' => rgar($entry, 50),
-            '_veterinarian_name' => rgar($entry, 42),
-            '_veterinarian_phone' => rgar($entry, 36),
-            '_application_url' => $application_url,
-        );
-
         // Create a new CPT entry
         if (empty($existing_post_id)) {
             $existing_post_id = wp_insert_post(array(
                 'post_type' => 'foster_entry',
                 'post_title' => 'Foster Entry ' . $entry_id . ':',
                 'post_status' => 'publish',
-                'meta_input' => $meta_array,
+                'meta_input' => array('_gf_entry_id' => $entry_id,),
             ));
         }
 
-        // Then go through and update/add post meta values
-        add_meta_to_existing_cpt($existing_post_id, '_contract_started', "not started");
+        $application_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}");
+
+        /**
+         * Post meta values:
+         * Entry [notes, date] 
+         * Reference [Name, Phone]
+         * Veterinarian [Name, Phone]
+         * Applicant [Names, Phone, Approval Status, Email]
+         * Application URL
+         */
+
+        add_meta_to_existing_cpt($existing_post_id, '_entry_notes', "");
         add_meta_to_existing_cpt($existing_post_id, '_gf_entry_date', $entry['date_created']);
+
+        add_meta_to_existing_cpt($existing_post_id, '_reference_name', rgar($entry, 37));
+        add_meta_to_existing_cpt($existing_post_id, '_reference_phone', rgar($entry, 50));
+
+        add_meta_to_existing_cpt($existing_post_id, '_veterinarian_name', rgar($entry, 42));
+        add_meta_to_existing_cpt($existing_post_id, '_veterinarian_phone', rgar($entry, 36));
+
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_names', rgar($entry, 8));
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_phone_number', rgar($entry, 49));
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_approval_status', "Pending");
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_email', rgar($entry, 11));
+
+        add_meta_to_existing_cpt($existing_post_id, '_application_url', $application_url);
     }
 }
 
