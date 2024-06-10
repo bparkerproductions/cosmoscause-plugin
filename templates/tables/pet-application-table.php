@@ -8,7 +8,6 @@ function display_entries()
         <thead>
             <tr>
                 <th><?php esc_html_e('Entry', 'cosmoscause-plugin'); ?></th>
-                <th><?php esc_html_e('Applied for', 'cosmoscause-plugin'); ?></th>
                 <th><?php esc_html_e('Applicant(s)', 'cosmoscause-plugin'); ?></th>
                 <th><?php esc_html_e('Contact', 'cosmoscause-plugin'); ?></th>
                 <th><?php esc_html_e('Date', 'cosmoscause-plugin'); ?></th>
@@ -51,8 +50,15 @@ function generate_table_rows()
                     <?php include plugin_dir_path(__FILE__) . 'components/notes-section.php'; ?>
                 </div>
             </td>
-            <td><?= esc_html($pet_name) ?></td>
-            <td><?= esc_html($applicant_names); ?></td>
+            <td>
+                <p>
+                    <i class="fa-light fa-user-pen fa-lg text-dark me-2"></i><?= esc_html($applicant_names); ?>
+                </p>
+                <p>
+                    <i class="fa-light fa-dog fa-lg text-dark me-2"></i><span class="fst-italic">Applied for: </span>
+                    <span class="text-primary"><?= esc_html($pet_name) ?></span>
+                </p>
+            </td>
             <td>
                 <?php include plugin_dir_path(__FILE__) . 'parts/contact-info.php'; ?>
 
