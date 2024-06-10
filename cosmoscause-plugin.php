@@ -57,8 +57,15 @@ function cosmoscause_add_scripts()
     wp_enqueue_script('datatables-bs5-js', 'https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js', array('datatables-js'), null, true);
 
     // REST API scripts
+    // TODO: refactor these with a Laravel mix bundler. I only need one script here.
     wp_enqueue_script('cosmoscause-approval-script', plugins_url('js/approval.js', __FILE__), array(), null, true);
     wp_localize_script('cosmoscause-approval-script', 'ajax_object', array(
+        'nonce' => wp_create_nonce('wp_rest'),
+        'base_url' => get_site_url()
+    ));
+
+    wp_enqueue_script('cosmoscause-payments-script', plugins_url('js/payment-collected.js', __FILE__), array(), null, true);
+    wp_localize_script('cosmoscause-payments-script', 'ajax_object', array(
         'nonce' => wp_create_nonce('wp_rest'),
         'base_url' => get_site_url()
     ));
@@ -85,6 +92,7 @@ add_action('admin_enqueue_scripts', 'cosmoscause_add_scripts');
 include plugin_dir_path(__FILE__) . 'api/approval.php';
 include plugin_dir_path(__FILE__) . 'api/notes.php';
 include plugin_dir_path(__FILE__) . 'api/email.php';
+include plugin_dir_path(__FILE__) . 'api/payment.php';
 
 /**
  * Create the database page functionality under the "Forms" section

@@ -8,7 +8,10 @@
         const linkFieldContainer = parent.querySelector(
           ".contract-generation__link-container"
         );
-        linkFieldContainer.classList.remove("d-none");
+
+        if (linkFieldContainer.classList.contains("d-none"))
+          linkFieldContainer.classList.remove("d-none");
+        else linkFieldContainer.classList.add("d-none");
 
         const generatedLink = generateLink(linkField);
 

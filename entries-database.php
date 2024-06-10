@@ -95,7 +95,7 @@ function cosmoscause_sync_pet_applications($form_id)
          * Landlord [Phone, Email], 
          * Reference [Name, Phone]
          * Applicant [Names, Phone, Approval Status, Email, Address]
-         * Application URL, Contract Started,
+         * Application URL, Contract Started, Payment Collected
          */
         add_meta_to_existing_cpt($existing_post_id, '_entry_notes', "");
         add_meta_to_existing_cpt($existing_post_id, '_gf_entry_date', $entry['date_created']);
@@ -116,6 +116,7 @@ function cosmoscause_sync_pet_applications($form_id)
 
         add_meta_to_existing_cpt($existing_post_id, '_application_url', $application_url);
         add_meta_to_existing_cpt($existing_post_id, '_contract_started', "not started");
+        add_meta_to_existing_cpt($existing_post_id, '_payment_status', "not collected");
     }
 }
 

@@ -8,11 +8,11 @@
         <div class="d-none contract-generation__link-container mt-2">
             <div>
                 <a data-address="<?= $applicant_address; ?>" data-phone-number="<?= $phone_number; ?>" data-email="<?= $email; ?>" data-applicant-name="<?= $applicant_names; ?>" data-pet-name="<?= $pet_name ?>" target="_blank" class="contract-generation__link" href="#" title="Open Contract Link">
-                    <i class="fa-regular fa-arrow-up-right-from-square me-2 fa-sm text-dark"></i>Contract Link</i>
+                    <i class="fa-regular fa-arrow-up-right-from-square me-2 fa-sm text-dark"></i>Get Contract Link</i>
                 </a>
 
                 <a class="contract-generation__email d-block mt-2 cursor-pointer" data-recipient-email="<?= $email; ?>" title="Send contract link to <?= $email; ?>">
-                    <span class="me-2"><i class="fa-solid fa-envelope fa-lg text-primary"></i></span>Email Contract
+                    <span class="me-2"><i class="fa-solid fa-envelope fa-lg text-primary"></i></span>Send Contract Link
                 </a>
 
             </div>

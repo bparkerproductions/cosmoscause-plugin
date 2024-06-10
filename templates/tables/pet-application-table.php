@@ -41,6 +41,7 @@ function generate_table_rows()
         $reference_phone = get_post_meta($entry->ID, '_reference_phone', true);
         $veterinatian_list = unserialize(get_post_meta($entry->ID, '_veterinarian_list', true));
         $application_url = get_post_meta($entry->ID, '_application_url', true);
+        $payment_status = get_post_meta($entry->ID, '_payment_status', true);
     ?>
         <tr class="position-relative">
             <td>
@@ -87,8 +88,13 @@ function generate_table_rows()
                 </div>
             </td>
             <td>
-                <div class="mt-1">
-                    <input class="form-check-input" type="checkbox" value="" id="paymentCheck">
+                <div class="payment-collected">
+                    <?php
+                    $payment_notifier_class = $payment_status === 'collected' ? 'bg-success' : 'bg-dark-subtle';
+                    $payment_checked = $payment_status === 'collected' ? 'checked' : '';
+                    ?>
+                    <span class="mb-2 badge d-block <?= $payment_notifier_class; ?> payment-collected__notifier"><?= esc_html($payment_status); ?></span>
+                    <input class="form-check-input payment-collected__status" type="checkbox" value="" id="paymentCheck" data-entry-id="<?= $entry->ID; ?>" <?= $payment_checked; ?>>
                     <label class="form-check-label" for="flexCheckDefault">
                         Payment Collected
                     </label>
