@@ -11,9 +11,8 @@ function display_entries()
                 <th><?php esc_html_e('Applicant(s)', 'cosmoscause-plugin'); ?></th>
                 <th><?php esc_html_e('Contact', 'cosmoscause-plugin'); ?></th>
                 <th><?php esc_html_e('Date', 'cosmoscause-plugin'); ?></th>
-
-                <!-- Approved status -->
                 <th><?php esc_html_e('Status', 'cosmoscause-plugin'); ?></th>
+                <th><?php esc_html_e('Payment', 'cosmoscause-plugin'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -85,6 +84,14 @@ function generate_table_rows()
                     include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php';
                     include plugin_dir_path(__FILE__) . 'parts/contract-generation.php';
                     ?>
+                </div>
+            </td>
+            <td>
+                <div class="mt-1">
+                    <input class="form-check-input" type="checkbox" value="" id="paymentCheck">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Payment Collected
+                    </label>
                 </div>
             </td>
         </tr>
