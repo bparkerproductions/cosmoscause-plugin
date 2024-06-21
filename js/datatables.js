@@ -36,6 +36,19 @@
           },
         });
       }
+
+      // Initialize the surrender application datatable
+      const surrenderApplicationTable = document.getElementById(
+        "surrender-application-table"
+      );
+      if (surrenderApplicationTable) {
+        new DataTable(surrenderApplicationTable, {
+          paging: false,
+          searching: true,
+          ordering: true,
+          order: [3, "desc"],
+        });
+      }
     }
 
     function setInitialSearch() {

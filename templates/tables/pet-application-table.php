@@ -65,10 +65,10 @@ function generate_table_rows()
                 <div class=" my-1">
                     <?php if ($veterinatian_list !== false) :
                         foreach ($veterinatian_list as $vet) :
-                            $vet_name = $vet['Name'];
-                            $vet_phone = $vet['Phone Number']; ?>
-                            <a class="me-2 text-decoration-none" href="tel:<?= esc_html($vet_phone) ?>" title="Veterinarian Phone Number">
-                                <span class="me-2"><i class="fa-duotone fa-phone"></i></span><?= $vet_name ?> <span class="fst-italic fs-sm">(Veterinarian)</span>
+                            $veterinatian_name = $vet['Name'];
+                            $veterinatian_phone = $vet['Phone Number']; ?>
+                            <a class="me-2 text-decoration-none" href="tel:<?= esc_html($veterinatian_phone) ?>" title="Veterinarian Phone Number">
+                                <span class="me-2"><i class="fa-duotone fa-phone"></i></span><?= $veterinatian_name ?> <span class="fst-italic fs-sm">(Veterinarian)</span>
                             </a>
                         <?php endforeach;
                     else : ?>

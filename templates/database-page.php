@@ -33,6 +33,9 @@ if (!current_user_can('manage_options')) {
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="foster-application-tab" data-bs-toggle="tab" data-bs-target="#foster-application" type="button" role="tab" aria-controls="foster-application" aria-selected="false">Foster Applications</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="surrender-application-tab" data-bs-toggle="tab" data-bs-target="#surrender-application" type="button" role="tab" aria-controls="surrender-application" aria-selected="false">Surrender Applications</button>
+            </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="pet-application" role="tabpanel" aria-labelledby="pet-application-tab">
@@ -45,6 +48,12 @@ if (!current_user_can('manage_options')) {
                 <?php if (class_exists('GFAPI')) :
                     include_once plugin_dir_path(__FILE__) . 'tables/foster-application-table.php';
                     Cosmoscause\FosterApplication\display_entries();
+                endif; ?>
+            </div>
+            <div class="tab-pane fade" id="surrender-application" role="tabpanel" aria-labelledby="surrender-application-tab">
+                <?php if (class_exists('GFAPI')) :
+                    include_once plugin_dir_path(__FILE__) . 'tables/surrender-application-table.php';
+                    Cosmoscause\SurrenderApplication\display_entries();
                 endif; ?>
             </div>
         </div>
