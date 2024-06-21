@@ -43,9 +43,9 @@ function cosmoscause_sync_gf_entries_to_cpt()
         return;
     }
 
-    // TODO refactor to rely on something besides the form_id
     cosmoscause_sync_pet_applications(1);
     cosmoscause_sync_foster_applications(2);
+    cosmoscause_sync_surrender_applications(3);
 }
 
 /**
@@ -121,7 +121,7 @@ function cosmoscause_sync_pet_applications($form_id)
 }
 
 /**
- * Sync pet application (GF ID of 2)
+ * Sync foster application (GF ID of 2)
  */
 function cosmoscause_sync_foster_applications($form_id)
 {
@@ -174,6 +174,61 @@ function cosmoscause_sync_foster_applications($form_id)
         add_meta_to_existing_cpt($existing_post_id, '_applicant_phone_number', rgar($entry, 49));
         add_meta_to_existing_cpt($existing_post_id, '_applicant_approval_status', "Pending");
         add_meta_to_existing_cpt($existing_post_id, '_applicant_email', rgar($entry, 11));
+
+        add_meta_to_existing_cpt($existing_post_id, '_application_url', $application_url);
+    }
+}
+
+/**
+ * Sync surrender application (GF ID of 3)
+ */
+function cosmoscause_sync_surrender_applications($form_id)
+{
+    $paging = array('offset' => 0, 'page_size' => 200);
+
+    $entries = GFAPI::get_entries($form_id, array(), array(), $paging);
+
+    foreach ($entries as $entry) {
+        $entry_id = $entry['id'];
+
+        // Check if a CPT already exists for this entry
+        $existing_post_id = get_posts(array(
+            'post_type' => 'surrender_entry',
+            'meta_key' => '_gf_entry_id',
+            'meta_value' => $entry_id,
+            'fields' => 'ids'
+        ));
+
+        // Create a new CPT entry
+        if (empty($existing_post_id)) {
+            $existing_post_id = wp_insert_post(array(
+                'post_type' => 'surrender_entry',
+                'post_title' => 'Surrender application entry ' . $entry_id . ':',
+                'post_status' => 'publish',
+                'meta_input' => array('_gf_entry_id' => $entry_id,)
+            ));
+        }
+
+        $application_url = admin_url("admin.php?page=gf_entries&view=entry&id={$form_id}&lid={$entry_id}");
+
+        /**
+         * Post meta values:
+         * Entry [notes, date]
+         * Applicant [name, email] Pet [name, breed]
+         * Reference [Name, Phone]
+         * Applicant [Names, Phone, Approval Status, Email, Address]
+         * Application URL,
+         */
+        add_meta_to_existing_cpt($existing_post_id, '_entry_notes', "");
+        add_meta_to_existing_cpt($existing_post_id, '_gf_entry_date', $entry['date_created']);
+
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_name', rgar($entry, 1));
+        add_meta_to_existing_cpt($existing_post_id, '_applicant_email', rgar($entry, 46));
+        add_meta_to_existing_cpt($existing_post_id, '_pet_name', rgar($entry, 7));
+        add_meta_to_existing_cpt($existing_post_id, '_pet_breed', rgar($entry, 8));
+
+        add_meta_to_existing_cpt($existing_post_id, '_reference_name', rgar($entry, 36));
+        add_meta_to_existing_cpt($existing_post_id, '_reference_phone', rgar($entry, 38));
 
         add_meta_to_existing_cpt($existing_post_id, '_application_url', $application_url);
     }
