@@ -51,13 +51,13 @@ function generate_table_rows()
                 </div>
             </td>
             <td><?= esc_html($applicant_names); ?></td>
-            <td style="overflow-x: auto;>
+            <td style="overflow-x: auto;">
                 <?php include plugin_dir_path(__FILE__) . 'parts/contact-info.php'; ?>
             </td>
             <td><?= esc_html($application_date); ?></td>
             <td>
                 <div class=" actions-container">
-                <?php include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php'; ?>
+                    <?php include plugin_dir_path(__FILE__) . 'parts/approve-deny-buttons.php'; ?>
                 </div>
             </td>
         </tr>

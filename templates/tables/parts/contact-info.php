@@ -28,7 +28,7 @@
                 <span class="fst-italic fs-sm">(Reference)</span>
             </a>
         <?php else : ?>
-            <p class="text-black-50 fst-italic">No reference provided</p>
+            <p class="text-black-50 fst-italic mb-1">No reference provided</p>
         <?php endif; ?>
     </div>
 <?php endif; ?>
@@ -40,7 +40,19 @@
                 <span class="me-2"><i class="fa-duotone fa-phone"></i></span><?= $vet_name; ?> <span class="fst-italic fs-sm">(Veterinarian)</span>
             </a>
         <?php else : ?>
-            <p class="text-black-50 fst-italic">No veterinarian provided</p>
+            <p class="text-black-50 fst-italic mb-1">No veterinarian provided</p>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($landlord_phone)) : ?>
+    <div class="my-1">
+        <?php if ($landlord_phone) : ?>
+            <a class="text-decoration-none" href="tel:<?= esc_html($landlord_phone) ?>" title="Landlord Phone Number">
+                <span class="me-2"><i class="fa-duotone fa-phone"></i></span><?= $landlord_name; ?> <span class="fst-italic fs-sm">(Landlord)</span>
+            </a>
+        <?php else : ?>
+            <p class="text-black-50 fst-italic mb-1">No landlord provided</p>
         <?php endif; ?>
     </div>
 <?php endif; ?>

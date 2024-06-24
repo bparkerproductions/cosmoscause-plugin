@@ -44,6 +44,8 @@ function generate_table_rows()
         $veterinatian_list = unserialize(get_post_meta($entry->ID, '_veterinarian_list', true));
         $application_url = get_post_meta($entry->ID, '_application_url', true);
         $payment_status = get_post_meta($entry->ID, '_payment_status', true);
+        $landlord_name = get_post_meta($entry->ID, '_landlord_name', true);
+        $landlord_phone = get_post_meta($entry->ID, '_landlord_phone', true);
     ?>
         <tr class="position-relative">
             <td>

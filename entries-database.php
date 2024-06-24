@@ -102,8 +102,8 @@ function cosmoscause_sync_pet_applications($form_id)
         add_meta_to_existing_cpt($existing_post_id, '_pet_name', rgar($entry, 4));
         add_meta_to_existing_cpt($existing_post_id, '_veterinarian_list', rgar($entry, 26));
 
-        add_meta_to_existing_cpt($existing_post_id, '_landlord_phone', rgar($entry, 13));
-        add_meta_to_existing_cpt($existing_post_id, '_landlord_email', rgar($entry, 14));
+        add_meta_to_existing_cpt($existing_post_id, '_landlord_name', rgar($entry, 13));
+        add_meta_to_existing_cpt($existing_post_id, '_landlord_phone', rgar($entry, 14));
 
         add_meta_to_existing_cpt($existing_post_id, '_reference_name', rgar($entry, 49));
         add_meta_to_existing_cpt($existing_post_id, '_reference_phone', rgar($entry, 50));
