@@ -16,7 +16,12 @@
           ordering: true,
           order: [[3, "desc"]],
           initComplete: function () {
-            setInitialSearch();
+            const url = new URL(window.location.href);
+            const searchParams = new URLSearchParams(url.search);
+            const searchValue = searchParams.get("search");
+            if (searchValue) {
+              this.api().search(searchValue).draw();
+            }
           },
         });
       }
@@ -31,9 +36,6 @@
           searching: true,
           ordering: true,
           order: [3, "desc"],
-          initComplete: function () {
-            setInitialSearch();
-          },
         });
       }
 
@@ -48,15 +50,6 @@
           ordering: true,
           order: [3, "desc"],
         });
-      }
-    }
-
-    function setInitialSearch() {
-      const url = new URL(window.location.href);
-      const searchParams = new URLSearchParams(url.search);
-      const searchValue = searchParams.get("search");
-      if (searchValue) {
-        this.api().search(searchValue).draw();
       }
     }
   });

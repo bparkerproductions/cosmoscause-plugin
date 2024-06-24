@@ -29,8 +29,6 @@
               ".payment-collected__notifier"
             );
 
-            console.log(data);
-
             if (data.checked) {
               notifier.classList.remove("bg-dark-subtle");
               notifier.classList.add("bg-success");
