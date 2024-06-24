@@ -14,15 +14,16 @@
           paging: false,
           searching: true,
           ordering: true,
+          autoWidth: false,
+          columnDefs: [
+            { targets: 0, width: "100px" },
+            { targets: 1, width: "150px" },
+            { targets: 2, width: "150px" },
+            { targets: 3, width: "100px" },
+            { targets: 4, width: "150px" },
+            { targets: 5, width: "150px" },
+          ],
           order: [[3, "desc"]],
-          initComplete: function () {
-            const url = new URL(window.location.href);
-            const searchParams = new URLSearchParams(url.search);
-            const searchValue = searchParams.get("search");
-            if (searchValue) {
-              this.api().search(searchValue).draw();
-            }
-          },
         });
       }
 
@@ -35,6 +36,14 @@
           paging: false,
           searching: true,
           ordering: true,
+          autoWidth: false,
+          columnDefs: [
+            { targets: 0, width: "100px" },
+            { targets: 1, width: "150px" },
+            { targets: 2, width: "150px" },
+            { targets: 3, width: "100px" },
+            { targets: 4, width: "150px" },
+          ],
           order: [3, "desc"],
         });
       }
@@ -48,6 +57,13 @@
           paging: false,
           searching: true,
           ordering: true,
+          autoWidth: false,
+          columnDefs: [
+            { targets: 0, width: "100px" },
+            { targets: 1, width: "150px" },
+            { targets: 2, width: "150px" },
+            { targets: 3, width: "100px" },
+          ],
           order: [3, "desc"],
         });
       }

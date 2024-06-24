@@ -4,19 +4,21 @@ namespace Cosmoscause\SurrenderApplication;
 
 function display_entries()
 { ?>
-    <table id="surrender-application-table" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th><?php esc_html_e('Entry', 'cosmoscause-plugin'); ?></th>
-                <th><?php esc_html_e('Applicant(s)', 'cosmoscause-plugin'); ?></th>
-                <th><?php esc_html_e('Contact', 'cosmoscause-plugin'); ?></th>
-                <th><?php esc_html_e('Date', 'cosmoscause-plugin'); ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php generate_table_rows(); ?>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table id="surrender-application-table" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th><?php esc_html_e('Entry', 'cosmoscause-plugin'); ?></th>
+                    <th><?php esc_html_e('Applicant(s)', 'cosmoscause-plugin'); ?></th>
+                    <th><?php esc_html_e('Contact', 'cosmoscause-plugin'); ?></th>
+                    <th><?php esc_html_e('Date', 'cosmoscause-plugin'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php generate_table_rows(); ?>
+            </tbody>
+        </table>
+    </div>
     <?php }
 
 function generate_table_rows()
@@ -52,7 +54,7 @@ function generate_table_rows()
                     <span class="text-primary"><?= esc_html($pet_name) ?> (<?= esc_html($pet_breed); ?>)</span>
                 </p>
             </td>
-            <td>
+            <td style="overflow-x: auto;">
                 <?php include plugin_dir_path(__FILE__) . 'parts/contact-info.php'; ?>
             </td>
             <td><?= esc_html($application_date); ?></td>

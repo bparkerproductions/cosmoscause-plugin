@@ -4,21 +4,23 @@ namespace Cosmoscause\PetApplication;
 
 function display_entries()
 { ?>
-    <table id="pet-application-table" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th><?php esc_html_e('Entry', 'cosmoscause-plugin'); ?></th>
-                <th><?php esc_html_e('Applicant(s)', 'cosmoscause-plugin'); ?></th>
-                <th><?php esc_html_e('Contact', 'cosmoscause-plugin'); ?></th>
-                <th><?php esc_html_e('Date', 'cosmoscause-plugin'); ?></th>
-                <th><?php esc_html_e('Status', 'cosmoscause-plugin'); ?></th>
-                <th><?php esc_html_e('Payment', 'cosmoscause-plugin'); ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php generate_table_rows(); ?>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table id="pet-application-table" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th><?php esc_html_e('Entry', 'cosmoscause-plugin'); ?></th>
+                    <th><?php esc_html_e('Applicant(s)', 'cosmoscause-plugin'); ?></th>
+                    <th><?php esc_html_e('Contact', 'cosmoscause-plugin'); ?></th>
+                    <th><?php esc_html_e('Date', 'cosmoscause-plugin'); ?></th>
+                    <th><?php esc_html_e('Status', 'cosmoscause-plugin'); ?></th>
+                    <th><?php esc_html_e('Payment', 'cosmoscause-plugin'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php generate_table_rows(); ?>
+            </tbody>
+        </table>
+    </div>
     <?php }
 
 function generate_table_rows()
@@ -59,7 +61,7 @@ function generate_table_rows()
                     <span class="text-primary"><?= esc_html($pet_name) ?></span>
                 </p>
             </td>
-            <td>
+            <td style="overflow-x: auto;">
                 <?php include plugin_dir_path(__FILE__) . 'parts/contact-info.php'; ?>
 
                 <div class=" my-1">

@@ -50,10 +50,10 @@ function cosmoscause_add_scripts()
     // Editor
     wp_enqueue_editor();
 
-    // Table
+    // DataTable dependecies
     wp_enqueue_style('datatables-css', 'https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css');
-    wp_enqueue_script('bootstrap5-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js', array(), null, true);
-    wp_enqueue_script('datatables-js', 'https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js', array(), null, true);
+    wp_enqueue_script('bootstrap5-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js', array('jquery'), null, true);
+    wp_enqueue_script('datatables-js', 'https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js', array('jquery'), null, true);
     wp_enqueue_script('datatables-bs5-js', 'https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js', array('datatables-js'), null, true);
 
     // REST API scripts
